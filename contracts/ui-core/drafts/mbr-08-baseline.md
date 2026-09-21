@@ -46,4 +46,6 @@ UI Lock is presentation ownership. MBR-08 explicitly allowed the Mouse data path
 
 ## Next step
 
-Do not promote this draft merely because frontend implementation begins. Promotion waits for accepted UX plus an integration-ready Core boundary.
+The frontend UX baseline is now accepted at MUI-08, so the original prerequisite "accepted UX" is satisfied.
+
+Do **not** promote this historical draft verbatim. The next contract phase should derive a fresh release candidate from the accepted MUI-08 semantics, separate frontend-private state from true cross-boundary obligations, and validate that boundary against the future Core design before releasing v1.
