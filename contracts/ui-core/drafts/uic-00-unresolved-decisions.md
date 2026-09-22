@@ -1,6 +1,6 @@
 # UIC-00 — unresolved decisions
 
-Status: **OPEN ITEMS — UIC-01 THROUGH UIC-03 DECISIONS RECORDED BELOW**.
+Status: **OPEN ITEMS — UIC-01 THROUGH UIC-04 DECISIONS RECORDED BELOW**.
 
 Source baseline: frozen `mouse-ui` UI Layout 1.0 at
 `e8adad7919e931c92515bf655ef4050876a8e7a9`.
@@ -10,17 +10,11 @@ UIC-00 intentionally does not resolve these questions. They are listed so later 
 | ID | Open decision | Why unresolved at UIC-00 | Earliest intended gate |
 |---|---|---|---|
 | OD-003 | Concrete intent/activity ID representation and width | Opaque identity semantics/allocation are fixed; binding type remains open | UIC-05 |
-| OD-009 | Whether 8 s / 15 s timers are Core-owned, UI-owned or negotiated | Product timeout is fixed; timer placement is architecture | UIC-03/UIC-04 |
-| OD-010 | Error taxonomy and retryability | Needs Core failure classes and UI needs | UIC-04 |
-| OD-011 | Capability/limit representation | Needs product-vs-implementation decision | UIC-04 |
-| OD-012 | Whether saved capacity 16 is frozen contract limit or v1 capability value | UI 1.0 exposes 16; future Core constraints need review | UIC-04 |
-| OD-013 | Display-name encoding/maximum raw length | UI display formatting is local; shared storage representation is not yet chosen | UIC-04 |
-| OD-014 | Escape keyboard-output capability advertisement | Semantic support exists; representation is deferred | UIC-04 |
 | OD-016 | Whether Custom template is global persisted state or derived per-device storage internally | Product semantics are global; physical storage is Core-local | UIC-05 |
 | OD-017 | Exact C ABI structs/enums/function signatures | Forbidden to freeze before semantic model stabilizes | UIC-05 |
 | OD-018 | Memory ownership/lifetime rules for C binding | ABI concern | UIC-05 |
 | OD-019 | Thread-safety/reentrancy requirements | Integration/runtime concern | UIC-05 |
-| OD-020 | Contract version negotiation/compatibility metadata | Release concern | UIC-05/UIC-08 |
+| OD-020 | Final released version constants/package compatibility metadata | Discovery/major-minor rules are defined; release binding/tag remains open | UIC-05/UIC-08 |
 | OD-021 | UI adapter mapping from public contract to private Product View | Must wait for candidate contract | UIC-06 |
 | OD-022 | Core conformance harness fixture format | Must wait for candidate contract | UIC-07 |
 | OD-023 | Immutable release package contents | Requires both-side conformance | UIC-08 |
@@ -68,3 +62,20 @@ These resolutions do not freeze a C ABI or async transport API.
   links every activity to one caller-owned `origin_intent_id`.
 
 Concrete ID representation/width remains OD-003 work for UIC-05.
+
+
+## Resolved by UIC-04
+
+- **OD-009 — Search timer ownership:** Core owns semantic deadlines: 8 s FIRST, 8 s SAVED,
+  15 s PAIR_NEW, using a monotonic source. Hardware timer/tick implementation remains private.
+- **OD-010 — Error taxonomy/retryability:** stable categories, retryability and visibility
+  are defined; backend/vendor codes are diagnostic-only.
+- **OD-011 — Capability/limit representation:** a read-only semantic ContractDescriptor
+  publishes major/minor, public limits and semantic capability tokens.
+- **OD-012 — Saved capacity:** 16 is the public maximum for contract major 1.
+- **OD-013 — Display-name contract:** valid UTF-8, maximum 63 encoded bytes; Core ensures
+  contract validity and UI retains display-specific truncation/suffix/fallback behavior.
+- **OD-014 — Escape output:** ESCAPE_OUTPUT is a required semantic capability; USB/TinyUSB
+  representation remains private.
+- **OD-020 discovery portion:** major/minor compatibility and required-capability discovery
+  are defined. Concrete binding constants and immutable release package remain later work.

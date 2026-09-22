@@ -1,0 +1,15 @@
+{
+  "fixture_id": "timeout-is-terminal-not-error",
+  "notification": {
+    "notification_seq": 1600,
+    "kind": "ACTIVITY_RESULT",
+    "activity_id": "activity-search-1",
+    "origin_intent_id": "intent-search-1",
+    "activity_kind": "SAVED",
+    "terminal_status": "TIMED_OUT",
+    "commit_revision": 1401
+  },
+  "expected": {
+    "error_object_present": false
+  }
+}

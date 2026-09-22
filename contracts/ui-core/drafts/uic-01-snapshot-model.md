@@ -53,7 +53,7 @@ Rules:
 Each record contains:
 
 - `mouse_id` — stable product identity;
-- `name` — user-visible semantic device name before UI-local formatting;
+- `name` — valid UTF-8 semantic device name, 0..63 encoded bytes, before UI-local formatting;
 - `confirmed_profile` — exactly one of `PASSTHROUGH | STANDARD | ESCAPE | CUSTOM`.
 
 The order used by a serialization or fixture is not normative. Saved Devices ordering is UI-local.
@@ -102,7 +102,8 @@ When present it contains:
 - `origin_intent_id` — caller-owned intent identity that created this activity;
 - `purpose` — `FIRST | SAVED | PAIR_NEW`;
 - `status` — `RUNNING | FOUND | TIMED_OUT | FAILED | CANCELLED`;
-- optional `candidate` when a candidate is semantically known.
+- optional `candidate` when a candidate is semantically known;
+- `error` is present exactly when `status = FAILED`, using the UIC-04 stable public error object.
 
 Candidate shape:
 
@@ -115,7 +116,7 @@ Normative rules:
 - at most one search activity is represented at a time;
 - `FOUND` requires a candidate;
 - non-`FOUND` states do not require a candidate;
-- timeout windows remain product behavior (8 s FIRST/SAVED, 15 s PAIR_NEW), but timer placement and countdown transport are deferred to later gates;
+- Core owns the semantic timeout windows: 8 s FIRST/SAVED and 15 s PAIR_NEW from accepted search activity start; UI may display progress but does not decide terminal timeout;
 - screen IDs, retry screen identity and navigation destination are not Snapshot data.
 
 ### 2.6 operation
@@ -130,7 +131,8 @@ When present it contains:
 - `status` — `PENDING | SUCCEEDED | FAILED | CANCELLED`;
 - `target_mouse_id` — semantic operation subject;
 - optional `requested_profile`;
-- optional `requested_custom` mapping.
+- optional `requested_custom` mapping;
+- `error` is present exactly when `status = FAILED`, using the UIC-04 stable public error object.
 
 Rules by kind:
 
@@ -253,12 +255,15 @@ A valid UIC-01 Snapshot satisfies all of the following:
 4. `confirmed_profile` never means requested/pending profile;
 5. Custom has exactly five source mappings;
 6. each Custom target belongs to the six-target domain;
-7. at most one search is represented;
-8. at most one operation is represented;
-9. `FOUND` search contains a candidate;
-10. pending profile/custom apply keeps confirmed state unchanged until success;
-11. UI-local draft/dirty/navigation/pixel state is absent;
-12. Snapshot publication is atomic per revision.
+7. every semantic Mouse/candidate name is valid UTF-8 and at most 63 encoded bytes;
+8. at most one search is represented;
+9. at most one operation is represented;
+10. `FOUND` search contains a candidate;
+11. FAILED search/operation contains exactly one stable public error object;
+12. non-FAILED terminal state does not require/synthesize an error object;
+13. pending profile/custom apply keeps confirmed state unchanged until success;
+14. UI-local draft/dirty/navigation/pixel state is absent;
+15. Snapshot publication is atomic per revision.
 
 ## 11. Traceability to accepted UIC-00 semantics
 

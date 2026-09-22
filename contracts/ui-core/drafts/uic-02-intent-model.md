@@ -1,6 +1,6 @@
 # UIC-02 — Intent Model
 
-Status: **ACCEPTED UIC-02 BASELINE**.
+Status: **ACCEPTED UIC-02 BASELINE — UIC-04 ERROR SEMANTICS APPLIED**.
 
 Source baseline:
 
@@ -119,9 +119,12 @@ Preconditions:
 - that current identity is saved;
 - no other search is active;
 - no conflicting operation is active;
-- the product can accept another saved Mouse under the capability/limit rules to be finalized by UIC-04.
+- fewer than 16 saved Mouse records exist;
+- required v1 semantic capabilities are present.
 
 The intent has **unsaved-only semantics**. An already-saved candidate cannot satisfy it.
+
+At 16 saved records the submission is rejected with `LIMIT_REACHED` before a new Pair activity starts.
 
 The old current Mouse remains authoritative until successful handoff. The UI does not issue a separate screen-specific “accept candidate” command in v1.
 
@@ -272,7 +275,7 @@ Normative invalid examples:
 - CANCEL_ACTIVITY for an unknown/non-current activity;
 - reusing an `intent_id` with a different payload.
 
-UIC-04 will define stable public error categories. UIC-02 defines the invalid conditions, not the final error-code taxonomy.
+UIC-04 defines stable public error categories for these invalid conditions. Every `REJECTED` submission carries exactly one public error object; raw backend/vendor codes remain diagnostic-only.
 
 ## 13. Retry/idempotency expectations
 
@@ -349,7 +352,5 @@ Partially resolved:
 Still deferred to UIC-03 or later:
 
 - concrete notification transport binding;
-- exact search timer ownership;
-- public error taxonomy;
-- capabilities/limits representation;
+- concrete C representation for version/capabilities/errors;
 - C ABI and memory/threading rules.
