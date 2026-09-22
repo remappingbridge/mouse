@@ -1,0 +1,53 @@
+{
+  "status": "UIC-05 candidate / not released",
+  "candidate_contract": {
+    "major": 1,
+    "minor": 0
+  },
+  "source_evidence": {
+    "mouse_ui_layout_v1_commit": "e8adad7919e931c92515bf655ef4050876a8e7a9",
+    "mouse_accepted_through_uic04": "dff0b9c0fadb856b4fe0f2c7f9f4b76f84de984a",
+    "repo_planner_accepted_through_uic04": "3fd2c1e0e552833edb22eb443d43dc11338b326f"
+  },
+  "candidate_branch": "uic/uic-05-v1-candidate",
+  "candidate_head_at_manifest_creation": "86553247c32b537dbbd2d4bf7909e6759f0e3afb",
+  "artifacts": [
+    {
+      "path": "contracts/ui-core/drafts/uic-05-v1-candidate.md",
+      "blob_sha": "2a2cdccb26acfdb6352c0b40bfff51420aad5709"
+    },
+    {
+      "path": "contracts/ui-core/drafts/uic-05-v1.schema.json",
+      "blob_sha": "08a7dbd9e2cd25595b3a93cd6ad2ff2d87e893bf"
+    },
+    {
+      "path": "contracts/ui-core/drafts/uic-05-c-binding.h",
+      "blob_sha": "d25fcca78e03d291cd874dfb2acc8e0ef514d8a1"
+    },
+    {
+      "path": "contracts/ui-core/drafts/uic-05-c-binding-smoke.c",
+      "blob_sha": "21eb71b2630e306369053b8d389d872f880e8572"
+    },
+    {
+      "path": "contracts/ui-core/drafts/uic-05-schema-c-equivalence.md",
+      "blob_sha": "dba290bc763735b158edf96f59e977a616e9e0e7"
+    },
+    {
+      "path": "contracts/ui-core/tools/validate_uic05.py",
+      "blob_sha": "b80f0fadba247a41d58978fd1e8dd0ed264da81b"
+    },
+    {
+      "path": "contracts/ui-core/traceability/uic-05-v1-candidate-coverage.json",
+      "blob_sha": "0b7ab2b6a1d5ce6d013a5c23a167a5986335ee22"
+    },
+    {
+      "path": "contracts/ui-core/fixtures/uic-05/manifest.json",
+      "blob_sha": "67034ad115235e443b0bbd12a6b9abbe46d4d997"
+    },
+    {
+      "path": ".github/workflows/uic-05-candidate.yml",
+      "blob_sha": "b454a5642aa3edb6b26ae47036bd93033b91236a"
+    }
+  ],
+  "release_directory_created": false
+}
