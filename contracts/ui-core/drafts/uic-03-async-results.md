@@ -102,6 +102,13 @@ Terminal states:
 
 An activity has exactly one terminal transition.
 
+Terminal classification is exclusive:
+
+- CANCELLED means an accepted logical cancellation invalidated the activity before success;
+- TIMED_OUT is search-only and means the product deadline expired before another terminal state;
+- FAILED means the activity could not complete because of backend/environment/product failure;
+- SUCCEEDED means its normative commit point was reached.
+
 A terminal transition may be delivered more than once by a binding, but repeat delivery
 does not create another terminal transition or side effect.
 
@@ -186,6 +193,12 @@ For every semantic commit:
 
 Consumers may receive the Snapshot before or after the notification at the transport
 level, but correlation by `commit_revision` must make the semantic order unambiguous.
+
+When one success commit itself changes current authority (FIRST acceptance, SAVED reconnect
+or HANDOFF), the logical notification order for that commit is always:
+
+1. CONNECTION_CHANGED
+2. ACTIVITY_RESULT(SUCCEEDED)
 
 A consumer must never interpret an older result as confirmation of a newer intent merely
 because delivery was delayed.
@@ -421,11 +434,13 @@ Help, Lock, Saved Devices or Remove This.
 ### Pending operations on disconnect
 
 - PROFILE_APPLY and CUSTOM_APPLY targeting the disconnected current Mouse can no longer
-  commit as if it remained authoritative; they terminate FAILED or CANCELLED according
-  to the cause, without changing confirmed state;
+  commit as if it remained authoritative; they terminate FAILED, without changing confirmed state;
 - REMOVE may continue because removing an offline saved Mouse is legal;
 - PAIR_NEW/HANDOFF whose ordering requires the old authoritative Mouse cannot promote the
-  candidate from a stale handoff; it terminates without authority promotion.
+  candidate from a stale handoff; it terminates FAILED without authority promotion.
+
+CANCELLED is not used for an environmental disconnect; it is reserved for accepted logical
+cancellation.
 
 UIC-04 defines public error categories for environment-caused failures.
 
