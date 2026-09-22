@@ -1,0 +1,22 @@
+{
+  "fixture_id": "first-use",
+  "snapshot": {
+    "revision": 1,
+    "saved_mice": [],
+    "current_mouse_id": null,
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": {
+      "activity_id": "search-first-1",
+      "purpose": "FIRST",
+      "status": "RUNNING",
+      "candidate": null
+    },
+    "operation": null
+  }
+}
