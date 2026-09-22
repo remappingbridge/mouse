@@ -1,0 +1,41 @@
+name: UIC-05 candidate validation
+
+on:
+  push:
+    branches:
+      - uic/uic-05-v1-candidate
+    paths:
+      - 'contracts/ui-core/**'
+      - '.github/workflows/uic-05-candidate.yml'
+  pull_request:
+    paths:
+      - 'contracts/ui-core/**'
+      - '.github/workflows/uic-05-candidate.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate candidate semantics
+        run: python3 contracts/ui-core/tools/validate_uic05.py
+
+      - name: Compile C11 binding smoke
+        working-directory: contracts/ui-core/drafts
+        run: |
+          cc -std=c11 -Wall -Wextra -Werror             uic-05-c-binding-smoke.c -o /tmp/uic05-smoke
+          /tmp/uic05-smoke
+
+      - name: Compile C++17 include smoke
+        working-directory: contracts/ui-core/drafts
+        run: |
+          printf '%s\n'             '#include "uic-05-c-binding.h"'             'int main() { return 0; }' > /tmp/uic05-cpp-smoke.cpp
+          c++ -std=c++17 -Wall -Wextra -Werror             -I. /tmp/uic05-cpp-smoke.cpp -o /tmp/uic05-cpp-smoke
+          /tmp/uic05-cpp-smoke
+
+      - name: Parse all candidate JSON
+        run: |
+          find contracts/ui-core/fixtures/uic-05 -name '*.json' -print0 |
+            xargs -0 -n1 python3 -m json.tool >/dev/null
+          python3 -m json.tool             contracts/ui-core/drafts/uic-05-v1.schema.json >/dev/null
