@@ -138,6 +138,9 @@ Each source maps to exactly one target:
 - FORWARD
 - BACKWARD
 
+The C binding array order for the five sources is fixed as:
+LEFT, RIGHT, MIDDLE, FORWARD, BACKWARD.
+
 The confirmed Custom mapping is one **global semantic product value**.
 
 The UI owns editable draft/dirty state. Only a complete five-source mapping crosses the
@@ -350,9 +353,12 @@ Submission disposition is exactly one of:
 
 REJECTED carries exactly one public error.
 
-ACCEPTED/REPLAY MAY carry the Core `activity_id` created for the logical request.
+For START_FIRST_SEARCH, START_SAVED_SEARCH, START_PAIR_NEW, APPLY_PROFILE, APPLY_CUSTOM
+and REMOVE_MOUSE, ACCEPTED/REPLAY MUST carry the Core `activity_id` for that logical
+request. REPLAY returns the original activity ID.
+
 CANCEL_ACTIVITY does not create a second activity; it targets an existing activity and
-therefore returns no new activity ID.
+therefore ACCEPTED/REPLAY carries no new activity ID.
 
 Replay rules:
 
@@ -626,17 +632,24 @@ The C candidate uses:
 
 Input rules:
 
-- caller MUST zero-initialize structs;
-- caller MUST set `struct_size`;
-- reserved fields MUST be zero.
+- caller MUST zero-initialize top-level call structs;
+- caller MUST set each top-level `struct_size` to the allocated buffer size;
+- reserved fields MUST be zero;
+- provider accepts a top-level buffer when `struct_size` is at least the v1.0 minimum
+  for the same major and ignores unknown caller trailing bytes.
 
 Output rules:
 
-- provider sets known fields and reserved fields to zero;
-- consumer ignores trailing bytes beyond the struct size it knows;
+- provider writes no more than the caller-declared top-level `struct_size`;
+- provider sets all known reserved output fields to zero;
+- when returning SNAPSHOT, provider sets the nested `snapshot.struct_size` to the
+  Snapshot shape it produced;
+- consumer uses the produced/known size and ignores later-minor trailing bytes;
 - consumer ignores unknown optional capability bits from a later compatible minor.
 
-Minor extensions MAY append trailing fields while preserving existing offsets/semantics.
+Only top-level size-tagged structs may grow by trailing append in a compatible minor.
+Embedded structs keep their v1.0 size; later minors may consume explicitly reserved
+embedded storage only when capability-gated and without changing existing offsets.
 
 A provider serving a v1.0 consumer MUST NOT emit unknown enum/kind values in baseline
 v1.0 flows.
@@ -661,6 +674,9 @@ Call-level status is intentionally narrow:
 - EMPTY (poll only)
 - INVALID_ARGUMENT
 - STRUCT_SIZE_MISMATCH
+
+`EMPTY` is valid only for poll_notification when no logical notification is currently
+available. Product failures are never encoded as call-level vendor/backend statuses.
 
 Product failures belong in public semantic Error objects, not call-level backend codes.
 
