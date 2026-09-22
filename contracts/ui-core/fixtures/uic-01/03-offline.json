@@ -1,0 +1,28 @@
+{
+  "fixture_id": "offline-saved-reconnect",
+  "snapshot": {
+    "revision": 20,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": null,
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": {
+      "activity_id": "search-saved-1",
+      "purpose": "SAVED",
+      "status": "RUNNING",
+      "candidate": null
+    },
+    "operation": null
+  }
+}
