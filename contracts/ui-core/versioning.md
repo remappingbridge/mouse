@@ -50,3 +50,22 @@ The first contract release may eventually be named `v1.0.0`, but only after the 
 ## No contract release yet
 
 MBR-08/MUI material remains historical traceability. UI Layout 1.0 is the current accepted product input, but no released UI↔Core ABI/API exists yet.
+
+
+## UIC-05 candidate binding
+
+The UIC-05 candidate binds the semantic descriptor to candidate constants:
+
+~~~text
+contract major = 1
+contract minor = 0
+~~~
+
+This identifies the candidate semantic/API line, not an immutable published release tag.
+
+The proposed C binding uses size-tagged top-level structs, zeroed reserved storage and
+bounded fixed-width fields. A compatible minor may append top-level trailing fields or
+consume reserved embedded storage only without changing existing offsets/semantics.
+
+The final immutable release directory/tag remains a UIC-08 decision after UI and Core
+conformance gates.
