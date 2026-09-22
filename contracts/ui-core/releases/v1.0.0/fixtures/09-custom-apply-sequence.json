@@ -1,0 +1,94 @@
+{
+  "object_type": "sequence",
+  "vector_id": "custom-apply-atomic",
+  "records": [
+    {
+      "index": 0,
+      "record": {
+        "object_type": "intent",
+        "value": {
+          "intent_id": 1300,
+          "kind": "APPLY_CUSTOM",
+          "target_mouse_id": 1,
+          "mapping": {
+            "LEFT": "FORWARD",
+            "RIGHT": "BACKWARD",
+            "MIDDLE": "MIDDLE",
+            "FORWARD": "LEFT",
+            "BACKWARD": "RIGHT"
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "record": {
+        "object_type": "submission",
+        "value": {
+          "disposition": "ACCEPTED",
+          "activity_id": 5300
+        }
+      }
+    },
+    {
+      "index": 2,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7300,
+          "kind": "ACTIVITY_RESULT",
+          "activity_result": {
+            "activity_id": 5300,
+            "origin_intent_id": 1300,
+            "activity_kind": "CUSTOM_APPLY",
+            "terminal_status": "SUCCEEDED",
+            "commit_revision": 401
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 401,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "CUSTOM"
+              }
+            ],
+            "current_mouse_id": 1,
+            "custom_confirmed": {
+              "LEFT": "FORWARD",
+              "RIGHT": "BACKWARD",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "LEFT",
+              "BACKWARD": "RIGHT"
+            },
+            "search": null,
+            "operation": {
+              "activity_id": 5300,
+              "origin_intent_id": 1300,
+              "kind": "CUSTOM_APPLY",
+              "status": "SUCCEEDED",
+              "target_mouse_id": 1,
+              "requested_profile": "CUSTOM",
+              "requested_custom": {
+                "LEFT": "FORWARD",
+                "RIGHT": "BACKWARD",
+                "MIDDLE": "MIDDLE",
+                "FORWARD": "LEFT",
+                "BACKWARD": "RIGHT"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
