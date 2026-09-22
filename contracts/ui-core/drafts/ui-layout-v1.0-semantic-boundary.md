@@ -1,10 +1,10 @@
 # UI Layout 1.0 — UI ↔ Core semantic boundary draft
 
-Status: **WORKING DRAFT — UIC-03 ASYNC CANDIDATE — NOT RELEASED**.
+Status: **WORKING DRAFT — UIC-04 CAPABILITIES/LIMITS/ERRORS CANDIDATE — NOT RELEASED**.
 
 Source: frozen `mouse-ui` UI Layout 1.0, `e8adad7919e931c92515bf655ef4050876a8e7a9`.
 
-UIC-00 established semantic ownership, UIC-01 the Snapshot, and UIC-02 the accepted UI→Core intents. UIC-03 now defines normative asynchronous correlation, terminal results, cancellation and ordering while leaving threading, concrete delivery API, C ABI and backend implementation unfrozen.
+UIC-00 established semantic ownership, UIC-01 the Snapshot, UIC-02 intents and UIC-03 async ordering. UIC-04 now defines public limits, capability discovery, UTF-8 name semantics, stable errors and version compatibility while leaving the concrete C ABI and backend technology private.
 
 ## Goal
 
@@ -237,33 +237,53 @@ The semantic candidates below are traceability targets for later UIC gates, not 
 | handoff succeeded/failed | Pair New authoritative replacement |
 | stale/unknown correlation ignored | late-result safety |
 
-## 11. Compatibility analysis
+## 11. Normative limits, capabilities and errors
 
-UIC-00 introduces no ABI and therefore creates no binary compatibility commitment.
+UIC-04 defines these semantics in:
 
-Compatibility obligations identified for later gates:
+`contracts/ui-core/drafts/uic-04-capabilities-limits-errors.md`
 
-- semantic identity must remain stable across list reorderings;
-- UI and Core must agree on profile and Custom value domains;
-- request/result correlation must survive asynchronous delivery;
-- future contract revisions must define how unsupported capabilities/limits are represented;
-- private UI/Core types may change freely as long as the released semantic contract remains satisfied.
+Contract-major-1 public limits are:
+
+- maximum 16 saved Mouse records;
+- semantic Mouse name is valid UTF-8, maximum 63 encoded bytes.
+
+A read-only ContractDescriptor publishes major/minor, limits and semantic capability
+tokens. Frozen UI 1.0 requires all v1.0 capabilities, including semantic ESCAPE_OUTPUT.
+
+HID++, HCI, GATT, USB descriptors and vendor packet/status values are not public
+capabilities.
+
+Stable error semantics consist of category + retryability + visibility. Provider
+diagnostic codes/messages may exist but are opaque and UI logic must not branch on them.
+
+Core owns the 8 s FIRST/SAVED and 15 s PAIR_NEW semantic deadlines.
+
+Physical persistence schema remains Core-local; cross-component compatibility depends on
+contract version/capabilities/public limits, not flash record layout.
+
+## 11.1 Compatibility analysis
+
+Contract major 1 now carries explicit compatibility commitments for saved capacity, name
+bound, required capabilities, error category meanings and search deadlines.
+
+Private UI/Core types, backend technology, flash schema and user-facing error copy may
+change freely when these public semantics remain satisfied.
 
 ## 12. Open decisions
 
 The authoritative unresolved-decision list is
 `contracts/ui-core/drafts/uic-00-unresolved-decisions.md`.
 
-UIC-03 resolves logical notification ordering, Core-owned activity identity, cancellation
-guarantees and stale/late handling.
+UIC-04 resolves public limit/capability/error/name/timeout semantics and the discovery
+part of version compatibility.
 
 Still deferred:
 
-- concrete intent/activity/notification ID widths and encodings;
-- exact 8 s / 15 s clock/timer implementation ownership details;
-- public error taxonomy;
-- capability/limit representation;
-- exact C ABI, memory ownership and thread-safety;
-- version negotiation and compatibility rules.
+- concrete integer/enum/string/descriptor C representation;
+- exact C ABI and function signatures;
+- memory ownership and thread-safety;
+- internal Custom persistence layout;
+- final release version/package/tag.
 
-Those decisions belong to UIC-04 and later gates.
+Those decisions belong to UIC-05 and later gates.
