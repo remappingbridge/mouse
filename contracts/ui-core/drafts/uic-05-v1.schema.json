@@ -309,7 +309,12 @@
           "then": {
             "required": [
               "candidate"
-            ]
+            ],
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
           }
         },
         {
@@ -326,7 +331,19 @@
           "then": {
             "required": [
               "error"
-            ]
+            ],
+            "not": {
+              "required": [
+                "candidate"
+              ]
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
           }
         }
       ]
@@ -395,7 +412,21 @@
           "then": {
             "required": [
               "requested_profile"
-            ]
+            ],
+            "properties": {
+              "requested_profile": {
+                "enum": [
+                  "PASSTHROUGH",
+                  "STANDARD",
+                  "ESCAPE"
+                ]
+              }
+            },
+            "not": {
+              "required": [
+                "requested_custom"
+              ]
+            }
           }
         },
         {
@@ -413,7 +444,43 @@
             "required": [
               "requested_profile",
               "requested_custom"
+            ],
+            "properties": {
+              "requested_profile": {
+                "const": "CUSTOM"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "REMOVE",
+                  "HANDOFF"
+                ]
+              }
+            },
+            "required": [
+              "kind"
             ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "requested_profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "requested_custom"
+                  ]
+                }
+              ]
+            }
           }
         },
         {
@@ -431,6 +498,13 @@
             "required": [
               "error"
             ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
           }
         }
       ]
@@ -551,6 +625,48 @@
           "if": {
             "properties": {
               "kind": {
+                "enum": [
+                  "START_FIRST_SEARCH",
+                  "START_SAVED_SEARCH",
+                  "START_PAIR_NEW"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "target_mouse_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
                 "const": "CANCEL_ACTIVITY"
               }
             },
@@ -561,7 +677,26 @@
           "then": {
             "required": [
               "target_activity_id"
-            ]
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_mouse_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
           }
         },
         {
@@ -579,7 +714,21 @@
             "required": [
               "target_mouse_id",
               "profile"
-            ]
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
           }
         },
         {
@@ -597,7 +746,21 @@
             "required": [
               "target_mouse_id",
               "mapping"
-            ]
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                }
+              ]
+            }
           }
         },
         {
@@ -614,7 +777,26 @@
           "then": {
             "required": [
               "target_mouse_id"
-            ]
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
           }
         }
       ]
@@ -655,7 +837,19 @@
           "then": {
             "required": [
               "error"
-            ]
+            ],
+            "not": {
+              "required": [
+                "activity_id"
+              ]
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
           }
         }
       ]
@@ -727,6 +921,116 @@
           "then": {
             "required": [
               "error"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "activity_kind": {
+                "enum": [
+                  "PROFILE_APPLY",
+                  "CUSTOM_APPLY",
+                  "REMOVE",
+                  "HANDOFF"
+                ]
+              }
+            },
+            "required": [
+              "activity_kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "terminal_status": {
+                "enum": [
+                  "SUCCEEDED",
+                  "FAILED",
+                  "CANCELLED"
+                ]
+              }
+            },
+            "not": {
+              "required": [
+                "candidate"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "activity_kind": {
+                "enum": [
+                  "FIRST",
+                  "SAVED",
+                  "PAIR_NEW"
+                ]
+              }
+            },
+            "required": [
+              "activity_kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "terminal_status": {
+                "enum": [
+                  "SUCCEEDED",
+                  "TIMED_OUT",
+                  "FAILED",
+                  "CANCELLED"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "activity_kind": {
+                "enum": [
+                  "FIRST",
+                  "SAVED",
+                  "PAIR_NEW"
+                ]
+              },
+              "terminal_status": {
+                "const": "SUCCEEDED"
+              }
+            },
+            "required": [
+              "activity_kind",
+              "terminal_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "candidate"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "terminal_status": {
+                "const": "CANCELLED"
+              }
+            },
+            "required": [
+              "terminal_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "cancel_intent_id"
             ]
           }
         }
