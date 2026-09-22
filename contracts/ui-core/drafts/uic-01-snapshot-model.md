@@ -1,12 +1,13 @@
 # UIC-01 — Snapshot Model
 
-Status: **CANDIDATE — AWAITING HUMAN REVIEW**.
+Status: **ACCEPTED UIC-01 BASELINE**.
 
 Source baseline:
 
 ~~~text
 UIC-00 accepted
-mouse main: 39bad92c8b83e9728ebbaea101e80f2119987e9a
+UIC-01 human review accepted 2026-09-22
+accepted integration baseline before UIC-02: b324fc7733036958005a29b23686c304ea182a07
 mouse-ui UI Layout 1.0: e8adad7919e931c92515bf655ef4050876a8e7a9
 ~~~
 
