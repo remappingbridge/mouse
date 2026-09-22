@@ -38,9 +38,9 @@ These resolutions do not freeze a C ABI or async transport API.
 - **OD-005 — Command submission model:** resolved semantically as atomic `ACCEPTED | REPLAY | REJECTED`. Accepted work may still be internally queued; asynchronous completion remains UIC-03.
 - **OD-015 — Custom commit granularity:** resolved; Custom draft/editing is UI-local and only the complete five-source mapping crosses the boundary through `APPLY_CUSTOM`.
 
-## Partially resolved by UIC-02
+## Historical partial resolution by UIC-02
 
-- **OD-003 — Request/correlation identity:** opaque identity semantics and caller allocation are fixed. Concrete type/width remain open for the later binding.
+- **OD-003 — Request/correlation identity:** UIC-02 fixed opaque identity semantics and caller allocation. UIC-05 later completed the concrete representation; see the resolved UIC-05 section below.
 
 
 ## Resolved by UIC-03
@@ -56,7 +56,7 @@ These resolutions do not freeze a C ABI or async transport API.
 - **OD-003 activity side:** Core allocates unique non-reused `activity_id` values and
   links every activity to one caller-owned `origin_intent_id`.
 
-Concrete ID representation/width remains OD-003 work for UIC-05.
+UIC-05 later completed OD-003 representation/width; see the resolved UIC-05 section below.
 
 
 ## Resolved by UIC-04
@@ -73,7 +73,8 @@ Concrete ID representation/width remains OD-003 work for UIC-05.
 - **OD-014 — Escape output:** ESCAPE_OUTPUT is a required semantic capability; USB/TinyUSB
   representation remains private.
 - **OD-020 discovery portion:** major/minor compatibility and required-capability discovery
-  are defined. Concrete binding constants and immutable release package remain later work.
+  were defined in UIC-04. UIC-05 later fixed candidate binding constants; immutable release
+  publication remains UIC-08.
 
 
 ## Resolved by UIC-05
