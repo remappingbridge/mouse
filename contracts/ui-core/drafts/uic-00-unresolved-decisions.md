@@ -1,6 +1,6 @@
 # UIC-00 — unresolved decisions
 
-Status: **OPEN ITEMS — UIC-01 THROUGH UIC-04 DECISIONS RECORDED BELOW**.
+Status: **OPEN ITEMS — UIC-01 THROUGH UIC-05 DECISIONS RECORDED BELOW**.
 
 Source baseline: frozen `mouse-ui` UI Layout 1.0 at
 `e8adad7919e931c92515bf655ef4050876a8e7a9`.
@@ -9,12 +9,7 @@ UIC-00 intentionally does not resolve these questions. They are listed so later 
 
 | ID | Open decision | Why unresolved at UIC-00 | Earliest intended gate |
 |---|---|---|---|
-| OD-003 | Concrete intent/activity ID representation and width | Opaque identity semantics/allocation are fixed; binding type remains open | UIC-05 |
-| OD-016 | Whether Custom template is global persisted state or derived per-device storage internally | Product semantics are global; physical storage is Core-local | UIC-05 |
-| OD-017 | Exact C ABI structs/enums/function signatures | Forbidden to freeze before semantic model stabilizes | UIC-05 |
-| OD-018 | Memory ownership/lifetime rules for C binding | ABI concern | UIC-05 |
-| OD-019 | Thread-safety/reentrancy requirements | Integration/runtime concern | UIC-05 |
-| OD-020 | Final released version constants/package compatibility metadata | Discovery/major-minor rules are defined; release binding/tag remains open | UIC-05/UIC-08 |
+| OD-020 | Immutable release version/tag metadata | candidate constants/compatibility are fixed; publication remains UIC-08 | UIC-08 |
 | OD-021 | UI adapter mapping from public contract to private Product View | Must wait for candidate contract | UIC-06 |
 | OD-022 | Core conformance harness fixture format | Must wait for candidate contract | UIC-07 |
 | OD-023 | Immutable release package contents | Requires both-side conformance | UIC-08 |
@@ -79,3 +74,26 @@ Concrete ID representation/width remains OD-003 work for UIC-05.
   representation remains private.
 - **OD-020 discovery portion:** major/minor compatibility and required-capability discovery
   are defined. Concrete binding constants and immutable release package remain later work.
+
+
+## Resolved by UIC-05
+
+- **OD-003 — Concrete identity representation:** candidate C binding uses unsigned
+  64-bit `mouse_id`, `intent_id`, `activity_id`, Snapshot revision and
+  `notification_seq`; zero is reserved as none/invalid.
+- **OD-016 — Custom persistence ownership:** the contract exposes exactly one global
+  confirmed Custom mapping. Physical persistence/topology is Core-local and may use
+  global or per-device internals if the public global semantics are preserved.
+- **OD-017 — C binding candidate:** `uic-05-c-binding.h` defines the proposed v1
+  bounded structs/tag domains/function surface. It remains a candidate until UIC-08.
+- **OD-018 — C memory ownership/lifetime:** no provider-owned data pointers cross the
+  API; caller owns all input/output buffers, provider copies retained input before
+  return, and no allocator/free function crosses the boundary.
+- **OD-019 — Thread safety/reentrancy:** calls against one provider instance are
+  externally serialized by the caller and are not reentrant. Core internal concurrency
+  is private but contract publication is serialized.
+- **OD-020 candidate-binding portion:** semantic/binding candidate uses major 1,
+  minor 0, explicit reserved/trailing-field compatibility rules. Immutable release
+  version/tag publication remains UIC-08.
+
+No MUST-level semantic decision owned by UIC-05 remains open.
