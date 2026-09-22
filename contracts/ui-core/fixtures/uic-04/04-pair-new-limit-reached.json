@@ -1,0 +1,102 @@
+{
+  "fixture_id": "pair-new-at-public-limit",
+  "snapshot_before": {
+    "revision": 1000,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "MOUSE 01",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-2",
+        "name": "MOUSE 02",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-3",
+        "name": "MOUSE 03",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-4",
+        "name": "MOUSE 04",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-5",
+        "name": "MOUSE 05",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-6",
+        "name": "MOUSE 06",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-7",
+        "name": "MOUSE 07",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-8",
+        "name": "MOUSE 08",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-9",
+        "name": "MOUSE 09",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-10",
+        "name": "MOUSE 10",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-11",
+        "name": "MOUSE 11",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-12",
+        "name": "MOUSE 12",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-13",
+        "name": "MOUSE 13",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-14",
+        "name": "MOUSE 14",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-15",
+        "name": "MOUSE 15",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-16",
+        "name": "MOUSE 16",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1"
+  },
+  "submission": {
+    "intent_id": "intent-pair-limit",
+    "kind": "START_PAIR_NEW"
+  },
+  "expected": {
+    "disposition": "REJECTED",
+    "error": {
+      "category": "LIMIT_REACHED",
+      "retryability": "AFTER_STATE_CHANGE",
+      "visibility": "USER_ACTIONABLE"
+    },
+    "saved_count_after": 16
+  }
+}
