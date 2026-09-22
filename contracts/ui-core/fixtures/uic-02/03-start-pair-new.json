@@ -1,0 +1,34 @@
+{
+  "fixture_id": "start-pair-new",
+  "snapshot_before": {
+    "revision": 3,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  },
+  "submissions": [
+    {
+      "intent": {
+        "intent_id": "intent-003",
+        "kind": "START_PAIR_NEW"
+      },
+      "expected": {
+        "disposition": "ACCEPTED"
+      }
+    }
+  ]
+}

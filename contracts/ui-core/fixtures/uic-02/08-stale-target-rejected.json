@@ -1,0 +1,42 @@
+{
+  "fixture_id": "stale-profile-target-rejected",
+  "snapshot_before": {
+    "revision": 8,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-2",
+        "name": "TRAVEL MOUSE",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": "mouse-2",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  },
+  "submissions": [
+    {
+      "intent": {
+        "intent_id": "intent-008",
+        "kind": "APPLY_PROFILE",
+        "target_mouse_id": "mouse-1",
+        "profile": "ESCAPE"
+      },
+      "expected": {
+        "disposition": "REJECTED",
+        "reason": "target_mouse_id is saved but no longer current; never retarget implicitly"
+      }
+    }
+  ]
+}

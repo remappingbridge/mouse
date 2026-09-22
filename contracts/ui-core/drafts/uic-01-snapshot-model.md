@@ -1,12 +1,13 @@
 # UIC-01 — Snapshot Model
 
-Status: **CANDIDATE — AWAITING HUMAN REVIEW**.
+Status: **ACCEPTED UIC-01 BASELINE**.
 
 Source baseline:
 
 ~~~text
 UIC-00 accepted
-mouse main: 39bad92c8b83e9728ebbaea101e80f2119987e9a
+UIC-01 human review accepted 2026-09-22
+accepted integration baseline before UIC-02: b324fc7733036958005a29b23686c304ea182a07
 mouse-ui UI Layout 1.0: e8adad7919e931c92515bf655ef4050876a8e7a9
 ~~~
 
@@ -97,7 +98,7 @@ Only a confirmed/persisted semantic Custom mapping belongs here.
 
 When present it contains:
 
-- `activity_id` — opaque correlation identity for this activity; exact type/allocation is deferred to UIC-02/UIC-03;
+- `activity_id` — opaque correlation identity for this activity; UIC-02 fixes caller-owned intent identity semantics, while the exact activity/result correlation lifecycle is deferred to UIC-03 and concrete representation to UIC-05;
 - `purpose` — `FIRST | SAVED | PAIR_NEW`;
 - `status` — `RUNNING | FOUND | TIMED_OUT | FAILED | CANCELLED`;
 - optional `candidate` when a candidate is semantically known.
@@ -122,7 +123,7 @@ Normative rules:
 
 When present it contains:
 
-- `activity_id` — opaque correlation identity;
+- `activity_id` — opaque correlation identity; its relationship to the originating intent and terminal results is finalized by UIC-03;
 - `kind` — `PROFILE_APPLY | CUSTOM_APPLY | REMOVE | HANDOFF`;
 - `status` — `PENDING | SUCCEEDED | FAILED | CANCELLED`;
 - `target_mouse_id` — semantic operation subject;

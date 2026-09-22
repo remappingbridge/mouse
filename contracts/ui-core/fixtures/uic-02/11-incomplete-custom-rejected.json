@@ -1,0 +1,42 @@
+{
+  "fixture_id": "incomplete-custom-rejected",
+  "snapshot_before": {
+    "revision": 11,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  },
+  "submissions": [
+    {
+      "intent": {
+        "intent_id": "intent-011",
+        "kind": "APPLY_CUSTOM",
+        "target_mouse_id": "mouse-1",
+        "mapping": {
+          "LEFT": "FORWARD",
+          "RIGHT": "BACKWARD",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "LEFT"
+        }
+      },
+      "expected": {
+        "disposition": "REJECTED",
+        "reason": "mapping must contain exactly five sources"
+      }
+    }
+  ]
+}
