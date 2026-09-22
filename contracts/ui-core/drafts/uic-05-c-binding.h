@@ -57,6 +57,17 @@ typedef uint32_t mouse_uic_v1_profile_t;
 #define MOUSE_UIC_V1_PROFILE_ESCAPE       UINT32_C(3)
 #define MOUSE_UIC_V1_PROFILE_CUSTOM       UINT32_C(4)
 
+/*
+ * C array order for mouse_uic_v1_custom_mapping_t::source_to_target.
+ * These are indexes, not target values.
+ */
+typedef uint32_t mouse_uic_v1_custom_source_index_t;
+#define MOUSE_UIC_V1_SOURCE_LEFT_INDEX      UINT32_C(0)
+#define MOUSE_UIC_V1_SOURCE_RIGHT_INDEX     UINT32_C(1)
+#define MOUSE_UIC_V1_SOURCE_MIDDLE_INDEX    UINT32_C(2)
+#define MOUSE_UIC_V1_SOURCE_FORWARD_INDEX   UINT32_C(3)
+#define MOUSE_UIC_V1_SOURCE_BACKWARD_INDEX  UINT32_C(4)
+
 typedef uint32_t mouse_uic_v1_custom_target_t;
 #define MOUSE_UIC_V1_TARGET_INVALID   UINT32_C(0)
 #define MOUSE_UIC_V1_TARGET_LEFT      UINT32_C(1)
@@ -326,6 +337,14 @@ typedef struct {
     uint64_t reserved[4];
 } mouse_uic_v1_submission_result_t;
 
+/*
+ * ACTIVITY_RESULT class tagging:
+ * - search result: search_purpose != INVALID and operation_kind == INVALID
+ * - operation result: operation_kind != INVALID and search_purpose == INVALID
+ * - search SUCCEEDED carries candidate
+ * - FAILED carries error
+ * - CANCELLED carries cancel_intent_id
+ */
 typedef struct {
     mouse_uic_v1_activity_id_t activity_id;
     mouse_uic_v1_intent_id_t origin_intent_id;
@@ -384,6 +403,11 @@ typedef struct mouse_uic_v1_provider mouse_uic_v1_provider_t;
  * - caller owns all input/output buffers.
  * - provider MUST NOT retain pointers into caller-owned structs after a call returns.
  * - no allocator/free function crosses this boundary.
+ * - caller zero-initializes top-level call structs and sets struct_size.
+ * - provider accepts struct_size >= the v1.0 minimum for the same major and ignores
+ *   caller trailing bytes it does not understand.
+ * - provider writes only fields it knows, zeroes reserved output fields, and sets
+ *   nested snapshot.struct_size when returning a SNAPSHOT read result.
  */
 mouse_uic_v1_call_status_t mouse_uic_v1_get_descriptor(
     mouse_uic_v1_provider_t *provider,
