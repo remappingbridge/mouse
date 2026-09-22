@@ -1,6 +1,6 @@
 # UIC-00 — unresolved decisions
 
-Status: **OPEN ITEMS — UIC-01 THROUGH UIC-05 DECISIONS RECORDED BELOW**.
+Status: **ALL UIC-00 OPEN DECISIONS RESOLVED THROUGH UIC-08**.
 
 Source baseline: frozen `mouse-ui` UI Layout 1.0 at
 `e8adad7919e931c92515bf655ef4050876a8e7a9`.
@@ -9,10 +9,6 @@ UIC-00 intentionally does not resolve these questions. They are listed so later 
 
 | ID | Open decision | Why unresolved at UIC-00 | Earliest intended gate |
 |---|---|---|---|
-| OD-020 | Immutable release version/tag metadata | candidate constants/compatibility are fixed; publication remains UIC-08 | UIC-08 |
-| OD-021 | UI adapter mapping from public contract to private Product View | Must wait for candidate contract | UIC-06 |
-| OD-022 | Core conformance harness fixture format | Must wait for candidate contract | UIC-07 |
-| OD-023 | Immutable release package contents | Requires both-side conformance | UIC-08 |
 
 ## Non-decisions already closed by UIC-00
 
@@ -98,3 +94,29 @@ UIC-05 later completed OD-003 representation/width; see the resolved UIC-05 sect
   version/tag publication remains UIC-08.
 
 No MUST-level semantic decision owned by UIC-05 remains open.
+
+
+## Resolved by UIC-06
+
+- **OD-021 — UI adapter mapping:** resolved by the accepted mouse-ui adapter proof at
+  `7d1f0246ca4b70a2a7134de040b02db13e3bd540`. Public Snapshot/Intent semantics map
+  through a frontend-owned backend seam without publishing private Product View,
+  navigation, projector or renderer types.
+
+## Resolved by UIC-07
+
+- **OD-022 — Core conformance harness fixture format:** resolved by the accepted
+  `mouse-core` host semantic provider at
+  `f5b7384156a42543505b93dd7609e715c4cd3542`, using the neutral v1 fixtures and the
+  public C binding only.
+
+## Resolved by UIC-08
+
+- **OD-020 — Immutable release/version metadata:** resolved as UI↔Core Contract
+  `v1.0.0`, descriptor major 1/minor 0, under
+  `contracts/ui-core/releases/v1.0.0/`.
+- **OD-023 — Immutable release package contents:** resolved by the content-addressed
+  v1.0.0 package containing normative language, schema, C binding, schema/C equivalence,
+  neutral fixtures, traceability coverage, compatibility pins and release validator.
+
+No UIC-00 open decision remains unresolved.

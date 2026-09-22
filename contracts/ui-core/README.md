@@ -1,61 +1,58 @@
 # UI ↔ Core contract
 
-Status: **DRAFT DEFINITION PROGRAM — NO RELEASED CONTRACT VERSION**.
+Status: **v1.0.0 RELEASE CONTENT FROZEN BY UIC-08**.
 
-This boundary lets `mouse-ui` consume product truth and emit semantic intentions without depending on BLE, USB, flash, GPIO, screen layout, or other implementation details.
+This boundary lets `mouse-ui` consume product truth and emit semantic intentions without
+depending on BLE, USB, flash, GPIO, screen layout or other implementation details.
+
+## Active release
+
+The integration target is:
+
+`releases/v1.0.0/`
+
+Primary artifacts:
+
+- `releases/v1.0.0/contract.md` — normative semantics;
+- `releases/v1.0.0/schema.json` — machine-readable semantic schema;
+- `releases/v1.0.0/uic_v1.h` — released in-process C binding;
+- `releases/v1.0.0/fixtures/` — neutral conformance vectors;
+- `releases/v1.0.0/compatibility.json` — compatibility rules and proven component pins;
+- `releases/v1.0.0/manifest.json` — content-addressed artifact hashes.
+
+The release is proven by:
+
+~~~text
+mouse-ui consumer proof:
+7d1f0246ca4b70a2a7134de040b02db13e3bd540
+
+mouse-core provider proof:
+f5b7384156a42543505b93dd7609e715c4cd3542
+~~~
 
 ## Directories
 
-- `drafts/` — proposals and working semantic/C-binding definitions;
-- `releases/` — immutable released versions once UIC validation is complete;
+- `drafts/` — historical/proposal material; never an integration target after v1.0.0;
+- `releases/` — immutable released versions;
+- `fixtures/` — historical gate fixtures;
 - `traceability/` — accepted/historical product inputs;
-- `governance.md` — ownership and promotion rules;
+- `governance.md` — ownership/promotion/immutability rules;
 - `versioning.md` — compatibility/version policy.
-
-## Active frontend source
-
-~~~text
-remappingbridge/mouse-ui
-UI Layout 1.0
-main @ e8adad7919e931c92515bf655ef4050876a8e7a9
-release/ui-layout-v1.0 @ same commit
-~~~
-
-Business behavior is documented in `mouse-ui/docs/product/ui-layout-v1.0.md`; implementation architecture in `mouse-ui/docs/architecture/ui-layout-v1.0.md`.
-
-Traceability: [`traceability/ui-layout-v1.0.md`](traceability/ui-layout-v1.0.md).
-
-Working contract draft: [`drafts/ui-layout-v1.0-semantic-boundary.md`](drafts/ui-layout-v1.0-semantic-boundary.md).
-
-Current accepted/candidate semantic layers:
-
-- UIC-01 Snapshot: `drafts/uic-01-snapshot-model.md`;
-- UIC-02 Intents: `drafts/uic-02-intent-model.md`;
-- UIC-03 Async results/ordering: `drafts/uic-03-async-results.md`;
-- UIC-04 capabilities/limits/errors candidate: `drafts/uic-04-capabilities-limits-errors.md`.
-
-Language-neutral fixtures live under `fixtures/uic-01/` through `fixtures/uic-04/`.
-
-There is still **no released contract ABI/API**. UIC-05 is responsible for assembling the v1 candidate binding after UIC-04 acceptance.
 
 ## Fundamental rule
 
-Frontend mocks are not public contracts. Screen IDs, menu selection, Help, Lock, SDL, framebuffer, Inspector, scenario controls and private C structs remain frontend-owned unless a separate product decision explicitly promotes them.
+Frontend mocks, screen IDs, Help, Lock, SDL, framebuffer, Inspector, scenario controls and
+private C structs remain frontend-owned.
 
-Likewise, BTstack/HCI/GATT handles, TinyUSB report structs, flash layout and hardware timing remain Core-private.
+BTstack/HCI/GATT handles, TinyUSB report structs, flash layout and hardware timing remain
+Core-private.
 
-Only semantic facts/actions/results required across the repository boundary belong here.
+Only semantic facts/actions/results required across the repository boundary belong in the
+released contract.
 
-## UIC-05 v1 candidate
+## Historical candidate
 
-The current complete reviewable candidate is:
+UIC-05 assembled the candidate under `drafts/`; UIC-06 and UIC-07 proved consumer and
+provider implementability. UIC-08 promotes the proven semantics into `releases/v1.0.0/`.
 
-- semantic spec: `drafts/uic-05-v1-candidate.md`;
-- machine schema: `drafts/uic-05-v1.schema.json`;
-- C binding: `drafts/uic-05-c-binding.h`;
-- schema/C mapping: `drafts/uic-05-schema-c-equivalence.md`;
-- conformance vectors: `fixtures/uic-05/`;
-- validator: `tools/validate_uic05.py`;
-- UIC-00 coverage: `traceability/uic-05-v1-candidate-coverage.json`.
-
-This is **not** a released contract. `releases/` remains untouched until UIC-08.
+The release directory, not the UIC-05 draft, is the canonical integration dependency.

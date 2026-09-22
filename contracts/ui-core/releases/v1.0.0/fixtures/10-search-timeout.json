@@ -1,0 +1,77 @@
+{
+  "object_type": "sequence",
+  "vector_id": "saved-search-timeout",
+  "records": [
+    {
+      "index": 0,
+      "record": {
+        "object_type": "intent",
+        "value": {
+          "intent_id": 1400,
+          "kind": "START_SAVED_SEARCH"
+        }
+      }
+    },
+    {
+      "index": 1,
+      "record": {
+        "object_type": "submission",
+        "value": {
+          "disposition": "ACCEPTED",
+          "activity_id": 5400
+        }
+      }
+    },
+    {
+      "index": 2,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7400,
+          "kind": "ACTIVITY_RESULT",
+          "activity_result": {
+            "activity_id": 5400,
+            "origin_intent_id": 1400,
+            "activity_kind": "SAVED",
+            "terminal_status": "TIMED_OUT",
+            "commit_revision": 501
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 501,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "STANDARD"
+              }
+            ],
+            "current_mouse_id": null,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": {
+              "activity_id": 5400,
+              "origin_intent_id": 1400,
+              "purpose": "SAVED",
+              "status": "TIMED_OUT"
+            },
+            "operation": null
+          }
+        }
+      }
+    }
+  ]
+}

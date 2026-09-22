@@ -45,3 +45,18 @@ The first frozen frontend source is `mouse-ui UI Layout 1.0` at `e8adad7919e931c
 Contract analysis must start from the business behavior documented by that release, not copy its private `mui_product_view_t`, `mui_nav_app_t`, mock enums, screen enums, semantic Inspector elements, or SDL APIs.
 
 If a later UI Layout version changes a cross-boundary business requirement, the contract impact is reviewed explicitly. A layout version bump does not automatically imply a contract version bump, and a contract version bump does not imply a layout change.
+
+
+## Released-version immutability
+
+Once a version under `releases/` is accepted and promoted:
+
+- its normative semantics, schema, C binding, fixtures and compatibility metadata are
+  immutable;
+- `manifest.json` content-addresses every packaged artifact except itself;
+- CI MUST reject content drift;
+- post-release semantic/API edits in place are forbidden;
+- any change is proposed through a new versioned release.
+
+Component repositories declare compatibility with a release; they do not copy ownership
+of the contract from `remappingbridge/mouse`.
