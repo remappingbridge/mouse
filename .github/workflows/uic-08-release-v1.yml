@@ -1,0 +1,43 @@
+name: UI-Core v1.0.0 release validation
+
+on:
+  push:
+    branches:
+      - uic/uic-08-release-v1
+    paths:
+      - 'contracts/ui-core/releases/v1.0.0/**'
+      - '.github/workflows/uic-08-release-v1.yml'
+  pull_request:
+    paths:
+      - 'contracts/ui-core/releases/v1.0.0/**'
+      - '.github/workflows/uic-08-release-v1.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate-release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate frozen release
+        run: python3 contracts/ui-core/releases/v1.0.0/validate_release.py
+
+      - name: Compile released C11 binding smoke
+        working-directory: contracts/ui-core/releases/v1.0.0
+        run: |
+          cc -std=c11 -Wall -Wextra -Werror binding-smoke.c -o /tmp/uic-v1-smoke
+          /tmp/uic-v1-smoke
+
+      - name: Compile released C++17 include smoke
+        working-directory: contracts/ui-core/releases/v1.0.0
+        run: |
+          printf '%s\n' '#include "uic_v1.h"' 'int main() { return 0; }' > /tmp/uic-v1-cpp.cpp
+          c++ -std=c++17 -Wall -Wextra -Werror -I. /tmp/uic-v1-cpp.cpp -o /tmp/uic-v1-cpp
+          /tmp/uic-v1-cpp
+
+      - name: Parse release JSON
+        run: |
+          find contracts/ui-core/releases/v1.0.0 -name '*.json' -print0 |
+            xargs -0 -n1 python3 -m json.tool >/dev/null
