@@ -1,10 +1,10 @@
 # UI Layout 1.0 — UI ↔ Core semantic boundary draft
 
-Status: **WORKING DRAFT — UIC-00 CANDIDATE — NOT RELEASED**.
+Status: **WORKING DRAFT — UIC-01 SNAPSHOT CANDIDATE — NOT RELEASED**.
 
 Source: frozen `mouse-ui` UI Layout 1.0, `e8adad7919e931c92515bf655ef4050876a8e7a9`.
 
-UIC-00 establishes semantic ownership only. It does **not** freeze a C ABI, transport API, memory layout, threading model, callback model or backend implementation.
+UIC-00 established semantic ownership. UIC-01 now defines the normative language-neutral Snapshot semantics while still leaving C ABI, transport API, memory layout, threading model, callback model and backend implementation unfrozen.
 
 ## Goal
 
@@ -42,32 +42,33 @@ The exhaustive rule-level classification is recorded in
 | BTstack/HCI/GATT/HOGP/HID++/TinyUSB/flash/GPIO/SPI | Core-local | Explicitly excluded from normative contract |
 | desktop scale/backlight gain | UI-local | Development shell behavior only |
 
-## 2. Candidate Core → UI semantic snapshot
+## 2. Normative Core → UI semantic Snapshot
 
-A snapshot must be able to express, at minimum:
+UIC-01 defines the normative Snapshot semantics in:
 
-- saved Mouse records with stable product identity and display name;
-- confirmed profile for each saved Mouse;
-- zero or one current authoritative Mouse identity;
-- confirmed persistent global Custom mapping/template;
-- current search purpose/status and correlation identity when a search is active or has an observable terminal state;
-- current product operation kind/status/target and correlation identity when an operation is active or has an observable terminal state;
-- user-visible semantic failure information once error taxonomy is defined;
-- semantic capability/limit information needed by the UI to render or validate safely.
+`contracts/ui-core/drafts/uic-01-snapshot-model.md`
 
-Candidate value domains derived from UI 1.0:
+The Snapshot is one atomic revisioned value containing only:
 
-~~~text
-profile: PASSTHROUGH | STANDARD | ESCAPE | CUSTOM
-custom source: LEFT | RIGHT | MIDDLE | FORWARD | BACKWARD
-custom target: LEFT | RIGHT | MIDDLE | ESCAPE | FORWARD | BACKWARD
-search purpose: FIRST | SAVED | PAIR_NEW
-search status: IDLE | RUNNING | FOUND | TIMED_OUT | FAILED | CANCELLED
-operation: PROFILE_APPLY | CUSTOM_APPLY | REMOVE | HANDOFF
-operation status: IDLE | PENDING | SUCCEEDED | FAILED | CANCELLED
-~~~
+- saved Mouse records with stable identity, semantic name and confirmed profile;
+- zero or one authoritative current Mouse identity;
+- confirmed global Custom mapping;
+- at most one observable search activity;
+- at most one observable operation;
+- opaque activity correlation identity sufficient for later intent/result gates.
 
-These are semantic names, not a frozen language binding or enum representation.
+The authoritative invariants include:
+
+- current identity is null or references exactly one saved record;
+- saved identities are unique;
+- confirmed profile is distinct from requested/pending profile;
+- UI-local Custom draft/dirty state is absent;
+- publication is atomic per revision;
+- screen/navigation/pixel/SDL/Inspector state is forbidden.
+
+Language-neutral fixtures live under `contracts/ui-core/fixtures/uic-01/`.
+
+Exact C layout, activity-ID representation, async delivery and cancellation semantics remain deferred.
 
 ## 3. Candidate UI → Core semantic intents
 
@@ -216,19 +217,21 @@ Compatibility obligations identified for later gates:
 
 ## 12. Open decisions
 
-The authoritative UIC-00 unresolved-decision list is
+The authoritative unresolved-decision list is
 `contracts/ui-core/drafts/uic-00-unresolved-decisions.md`.
 
-Topics intentionally deferred include:
+UIC-01 resolves the language-neutral Snapshot schema and Snapshot atomicity/revision semantics.
 
-- exact schema and C binding;
-- snapshot atomicity and delivery mechanism;
-- request-ID type/allocation owner;
-- cancellation guarantee;
+Still deferred:
+
+- request/activity-ID type and allocation owner;
+- intent submission model;
+- cancellation guarantee and async result delivery;
 - Custom commit granularity;
 - exact timeout ownership;
 - error taxonomy;
 - capability/limit representation;
+- exact C ABI, memory ownership and thread-safety;
 - version negotiation and compatibility rules.
 
-These are later-gate decisions. UIC-00 only establishes that the semantics exist and who owns them.
+Those decisions belong to UIC-02 and later gates.
