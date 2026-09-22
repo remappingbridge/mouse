@@ -1,0 +1,33 @@
+{
+  "fixture_id": "stale-target-error",
+  "snapshot_before": {
+    "revision": 1100,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      },
+      {
+        "mouse_id": "mouse-2",
+        "name": "OFFICE",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-2"
+  },
+  "submission": {
+    "intent_id": "intent-stale-profile",
+    "kind": "APPLY_PROFILE",
+    "target_mouse_id": "mouse-1",
+    "profile": "ESCAPE"
+  },
+  "expected": {
+    "disposition": "REJECTED",
+    "error": {
+      "category": "STALE_STATE",
+      "retryability": "AFTER_REFRESH",
+      "visibility": "GENERIC_USER_FAILURE"
+    }
+  }
+}
