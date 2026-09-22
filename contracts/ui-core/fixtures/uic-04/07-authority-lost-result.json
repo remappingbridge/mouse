@@ -1,0 +1,25 @@
+{
+  "fixture_id": "authority-lost-failed-result",
+  "activity": {
+    "activity_id": "activity-profile-1",
+    "origin_intent_id": "intent-profile-1",
+    "kind": "PROFILE_APPLY"
+  },
+  "notification": {
+    "notification_seq": 1400,
+    "kind": "ACTIVITY_RESULT",
+    "activity_id": "activity-profile-1",
+    "origin_intent_id": "intent-profile-1",
+    "activity_kind": "PROFILE_APPLY",
+    "terminal_status": "FAILED",
+    "commit_revision": 1201,
+    "error": {
+      "category": "AUTHORITY_LOST",
+      "retryability": "AFTER_STATE_CHANGE",
+      "visibility": "GENERIC_USER_FAILURE"
+    }
+  },
+  "expected": {
+    "confirmed_profile_changed": false
+  }
+}
