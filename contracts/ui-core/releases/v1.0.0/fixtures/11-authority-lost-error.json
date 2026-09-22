@@ -1,0 +1,19 @@
+{
+  "object_type": "notification",
+  "value": {
+    "notification_seq": 7500,
+    "kind": "ACTIVITY_RESULT",
+    "activity_result": {
+      "activity_id": 5500,
+      "origin_intent_id": 1500,
+      "activity_kind": "PROFILE_APPLY",
+      "terminal_status": "FAILED",
+      "commit_revision": 601,
+      "error": {
+        "category": "AUTHORITY_LOST",
+        "retryability": "AFTER_STATE_CHANGE",
+        "visibility": "GENERIC_USER_FAILURE"
+      }
+    }
+  }
+}
