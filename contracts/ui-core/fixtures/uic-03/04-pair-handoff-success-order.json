@@ -1,0 +1,158 @@
+{
+  "fixture_id": "pair-handoff-success-order",
+  "initial_snapshot": {
+    "revision": 400,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": {
+      "activity_id": "act-pair-search",
+      "origin_intent_id": "intent-pair",
+      "purpose": "PAIR_NEW",
+      "status": "RUNNING",
+      "candidate": null
+    },
+    "operation": null
+  },
+  "steps": [
+    {
+      "type": "pair_search_success",
+      "revision": 401,
+      "snapshot": {
+        "revision": 401,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "STANDARD"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": {
+          "activity_id": "act-pair-search",
+          "origin_intent_id": "intent-pair",
+          "purpose": "PAIR_NEW",
+          "status": "FOUND",
+          "candidate": {
+            "mouse_id": "mouse-2",
+            "name": "OFFICE",
+            "already_saved": false
+          }
+        },
+        "operation": {
+          "activity_id": "act-handoff",
+          "origin_intent_id": "intent-pair",
+          "kind": "HANDOFF",
+          "status": "PENDING",
+          "target_mouse_id": "mouse-2",
+          "requested_profile": null,
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 800,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-pair-search",
+          "origin_intent_id": "intent-pair",
+          "activity_kind": "PAIR_NEW",
+          "terminal_status": "SUCCEEDED",
+          "commit_revision": 401,
+          "candidate": {
+            "mouse_id": "mouse-2",
+            "name": "OFFICE",
+            "already_saved": false
+          }
+        }
+      ]
+    },
+    {
+      "type": "handoff_success_commit",
+      "revision": 402,
+      "snapshot": {
+        "revision": 402,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "STANDARD"
+          },
+          {
+            "mouse_id": "mouse-2",
+            "name": "OFFICE",
+            "confirmed_profile": "PASSTHROUGH"
+          }
+        ],
+        "current_mouse_id": "mouse-2",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": {
+          "activity_id": "act-pair-search",
+          "origin_intent_id": "intent-pair",
+          "purpose": "PAIR_NEW",
+          "status": "FOUND",
+          "candidate": {
+            "mouse_id": "mouse-2",
+            "name": "OFFICE",
+            "already_saved": false
+          }
+        },
+        "operation": {
+          "activity_id": "act-handoff",
+          "origin_intent_id": "intent-pair",
+          "kind": "HANDOFF",
+          "status": "SUCCEEDED",
+          "target_mouse_id": "mouse-2",
+          "requested_profile": null,
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 801,
+          "kind": "CONNECTION_CHANGED",
+          "previous_current_mouse_id": "mouse-1",
+          "current_mouse_id": "mouse-2",
+          "commit_revision": 402,
+          "reason": "HANDOFF"
+        },
+        {
+          "notification_seq": 802,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-handoff",
+          "origin_intent_id": "intent-pair",
+          "activity_kind": "HANDOFF",
+          "terminal_status": "SUCCEEDED",
+          "commit_revision": 402
+        }
+      ],
+      "expected": {
+        "authoritative_mouse_count": 1
+      }
+    }
+  ]
+}
