@@ -57,6 +57,18 @@ expected_intents = {
     "CANCEL_ACTIVITY", "APPLY_PROFILE", "APPLY_CUSTOM", "REMOVE_MOUSE",
 }
 expected_profiles = {"PASSTHROUGH", "STANDARD", "ESCAPE", "CUSTOM"}
+expected_targets = {"LEFT", "RIGHT", "MIDDLE", "ESCAPE", "FORWARD", "BACKWARD"}
+expected_search_purposes = {"FIRST", "SAVED", "PAIR_NEW"}
+expected_search_statuses = {"RUNNING", "FOUND", "TIMED_OUT", "FAILED", "CANCELLED"}
+expected_operation_kinds = {"PROFILE_APPLY", "CUSTOM_APPLY", "REMOVE", "HANDOFF"}
+expected_operation_statuses = {"PENDING", "SUCCEEDED", "FAILED", "CANCELLED"}
+expected_terminal_statuses = {"SUCCEEDED", "TIMED_OUT", "FAILED", "CANCELLED"}
+expected_connection_reasons = {
+    "PHYSICAL_DISCONNECT", "PHYSICAL_CONNECT", "SEARCH_RECONNECT",
+    "FIRST_ACCEPT", "HANDOFF", "REMOVE_RELEASE",
+}
+expected_retryability = {"NOT_RETRYABLE", "AFTER_REFRESH", "AFTER_STATE_CHANGE", "LATER"}
+expected_visibility = {"DIAGNOSTIC_ONLY", "GENERIC_USER_FAILURE", "USER_ACTIONABLE"}
 expected_errors = {
     "INVALID_REQUEST", "CONFLICT", "STALE_STATE", "LIMIT_REACHED",
     "UNSUPPORTED", "INCOMPATIBLE_CONTRACT", "AUTHORITY_LOST",
@@ -72,12 +84,41 @@ if schema:
     defs = schema.get("$defs", {})
     intents = set(defs.get("intent", {}).get("properties", {}).get("kind", {}).get("enum", []))
     profiles = set(defs.get("profile", {}).get("enum", []))
+    targets = set(defs.get("target", {}).get("enum", []))
+    search_purposes = set(defs.get("search", {}).get("properties", {}).get("purpose", {}).get("enum", []))
+    search_statuses = set(defs.get("search", {}).get("properties", {}).get("status", {}).get("enum", []))
+    operation_kinds = set(defs.get("operation", {}).get("properties", {}).get("kind", {}).get("enum", []))
+    operation_statuses = set(defs.get("operation", {}).get("properties", {}).get("status", {}).get("enum", []))
+    terminal_statuses = set(defs.get("terminalStatus", {}).get("enum", []))
+    connection_reasons = set(
+        defs.get("connectionChanged", {}).get("properties", {}).get("reason", {}).get("enum", [])
+    )
+    retryability = set(defs.get("retryability", {}).get("enum", []))
+    visibility = set(defs.get("visibility", {}).get("enum", []))
     errcats = set(defs.get("errorCategory", {}).get("enum", []))
     caps = set(defs.get("capability", {}).get("enum", []))
     if intents != expected_intents:
         fail(f"schema intent domain mismatch: {sorted(intents)}")
     if profiles != expected_profiles:
         fail(f"schema profile domain mismatch: {sorted(profiles)}")
+    if targets != expected_targets:
+        fail(f"schema target domain mismatch: {sorted(targets)}")
+    if search_purposes != expected_search_purposes:
+        fail(f"schema search purpose mismatch: {sorted(search_purposes)}")
+    if search_statuses != expected_search_statuses:
+        fail(f"schema search status mismatch: {sorted(search_statuses)}")
+    if operation_kinds != expected_operation_kinds:
+        fail(f"schema operation kind mismatch: {sorted(operation_kinds)}")
+    if operation_statuses != expected_operation_statuses:
+        fail(f"schema operation status mismatch: {sorted(operation_statuses)}")
+    if terminal_statuses != expected_terminal_statuses:
+        fail(f"schema terminal status mismatch: {sorted(terminal_statuses)}")
+    if connection_reasons != expected_connection_reasons:
+        fail(f"schema connection reason mismatch: {sorted(connection_reasons)}")
+    if retryability != expected_retryability:
+        fail(f"schema retryability mismatch: {sorted(retryability)}")
+    if visibility != expected_visibility:
+        fail(f"schema visibility mismatch: {sorted(visibility)}")
     if errcats != expected_errors:
         fail(f"schema error domain mismatch: {sorted(errcats)}")
     if caps != expected_caps:
@@ -92,6 +133,60 @@ for name in expected_profiles:
     macro = "MOUSE_UIC_V1_PROFILE_" + name
     if macro not in header:
         fail(f"C binding missing profile macro {macro}")
+
+for name in expected_targets:
+    macro = "MOUSE_UIC_V1_TARGET_" + name
+    if macro not in header:
+        fail(f"C binding missing target macro {macro}")
+
+for name in expected_search_purposes:
+    macro = "MOUSE_UIC_V1_SEARCH_PURPOSE_" + name
+    if macro not in header:
+        fail(f"C binding missing search purpose macro {macro}")
+
+for name in expected_search_statuses:
+    macro = "MOUSE_UIC_V1_SEARCH_STATUS_" + name
+    if macro not in header:
+        fail(f"C binding missing search status macro {macro}")
+
+for name in expected_operation_kinds:
+    macro = "MOUSE_UIC_V1_OPERATION_" + name
+    if macro not in header:
+        fail(f"C binding missing operation kind macro {macro}")
+
+for name in expected_operation_statuses:
+    macro = "MOUSE_UIC_V1_OPERATION_STATUS_" + name
+    if macro not in header:
+        fail(f"C binding missing operation status macro {macro}")
+
+for name in expected_terminal_statuses:
+    macro = "MOUSE_UIC_V1_ACTIVITY_TERMINAL_" + name
+    if macro not in header:
+        fail(f"C binding missing terminal status macro {macro}")
+
+for name in expected_connection_reasons:
+    macro = "MOUSE_UIC_V1_CONNECTION_REASON_" + name
+    if macro not in header:
+        fail(f"C binding missing connection reason macro {macro}")
+
+retry_macros = {
+    "NOT_RETRYABLE": "MOUSE_UIC_V1_RETRY_NOT_RETRYABLE",
+    "AFTER_REFRESH": "MOUSE_UIC_V1_RETRY_AFTER_REFRESH",
+    "AFTER_STATE_CHANGE": "MOUSE_UIC_V1_RETRY_AFTER_STATE_CHANGE",
+    "LATER": "MOUSE_UIC_V1_RETRY_LATER",
+}
+for macro in retry_macros.values():
+    if macro not in header:
+        fail(f"C binding missing retryability macro {macro}")
+
+visibility_macros = {
+    "DIAGNOSTIC_ONLY": "MOUSE_UIC_V1_VISIBILITY_DIAGNOSTIC_ONLY",
+    "GENERIC_USER_FAILURE": "MOUSE_UIC_V1_VISIBILITY_GENERIC_USER_FAILURE",
+    "USER_ACTIONABLE": "MOUSE_UIC_V1_VISIBILITY_USER_ACTIONABLE",
+}
+for macro in visibility_macros.values():
+    if macro not in header:
+        fail(f"C binding missing visibility macro {macro}")
 
 for name in expected_errors:
     macro = "MOUSE_UIC_V1_ERROR_" + name
@@ -283,4 +378,5 @@ print("UIC-05 validation PASS")
 print(f"vectors={len(vector_files)}")
 print("traceability_rules=88")
 print("schema_c_domains=PASS")
+print("schema_c_full_tag_domain_equivalence=PASS")
 print("implementation_leakage_guard=PASS")
