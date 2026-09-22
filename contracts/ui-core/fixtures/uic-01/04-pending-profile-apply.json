@@ -1,0 +1,30 @@
+{
+  "fixture_id": "pending-profile-apply",
+  "snapshot": {
+    "revision": 30,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": {
+      "activity_id": "operation-profile-1",
+      "kind": "PROFILE_APPLY",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-1",
+      "requested_profile": "STANDARD",
+      "requested_custom": null
+    }
+  }
+}
