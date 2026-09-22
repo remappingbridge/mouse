@@ -1,0 +1,36 @@
+{
+  "release": "v1.0.0",
+  "contract": {
+    "major": 1,
+    "minor": 0
+  },
+  "source_candidate_commit": "af7d037646cd0e2917c81eee6acd1f0eb6592921",
+  "consumer_proof": {
+    "repository": "remappingbridge/mouse-ui",
+    "commit": "7d1f0246ca4b70a2a7134de040b02db13e3bd540",
+    "role": "consumer",
+    "declaration_path": "ui-core-contract.json"
+  },
+  "provider_proof": {
+    "repository": "remappingbridge/mouse-core",
+    "commit": "f5b7384156a42543505b93dd7609e715c4cd3542",
+    "role": "provider",
+    "declaration_path": "ui-core-contract.json"
+  },
+  "required_capabilities": [
+    "FIRST_DISCOVERY",
+    "SAVED_RECONNECT",
+    "PAIR_NEW",
+    "PROFILE_PASSTHROUGH",
+    "PROFILE_STANDARD",
+    "PROFILE_ESCAPE",
+    "PROFILE_CUSTOM",
+    "REMOVE_MOUSE",
+    "ESCAPE_OUTPUT"
+  ],
+  "public_limits": {
+    "max_saved_mice": 16,
+    "max_mouse_name_utf8_bytes": 63
+  },
+  "compatibility_rule": "equal major; provider minor >= consumer minimum minor; required capabilities present; major-1 public limits exact"
+}
