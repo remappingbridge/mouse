@@ -1,13 +1,13 @@
 # UIC-02 — Intent Model
 
-Status: **CANDIDATE — AWAITING HUMAN REVIEW**.
+Status: **ACCEPTED UIC-02 BASELINE**.
 
 Source baseline:
 
 ~~~text
 UIC-01 accepted
-mouse main: b324fc7733036958005a29b23686c304ea182a07
-repo-planner main: 45fd3f95880a03484eb3bbc6a67dec8a7bb692b9
+UIC-02 human review accepted 2026-09-22
+accepted integration baseline before UIC-03: c5a199271eb58c40c527a26926e3eab23e4be5ee
 mouse-ui UI Layout 1.0: e8adad7919e931c92515bf655ef4050876a8e7a9
 ~~~
 
@@ -139,16 +139,16 @@ Purpose: request cancellation/abandonment of a currently observable search or op
 
 Preconditions:
 
-- `target_activity_id` identifies the currently observable search or operation the caller intends to cancel.
+- `target_activity_id` identifies the currently non-terminal search or operation the caller intends to cancel.
 
 Command-level semantics:
 
-- acceptance means the cancellation request is valid and owned by Core;
-- acceptance does not guarantee physical work stopped immediately;
-- whether cancellation is hard, best-effort, logical invalidation, or a combination is resolved by UIC-03;
+- acceptance atomically logically invalidates the target activity and makes it terminal CANCELLED;
+- physical/backend cancellation is best effort and may complete later without product-state effect;
+- UIC-03 defines cancellation-vs-success races by semantic commit order;
 - UI may submit one cancellation intent per activity when search and operation coexist, such as Pair New handoff.
 
-An unknown or no-longer-current target activity is rejected at submission level. UIC-03 defines late-result handling after ownership is abandoned.
+An unknown, superseded or already-terminal target activity is rejected at submission level. UIC-03 forbids any late backend completion from changing confirmed truth after cancellation.
 
 ## 7. APPLY_PROFILE
 
@@ -348,9 +348,7 @@ Partially resolved:
 
 Still deferred to UIC-03 or later:
 
-- result delivery mechanism;
-- hard vs best-effort vs logical cancellation guarantee;
-- stale/late result retention;
+- concrete notification transport binding;
 - exact search timer ownership;
 - public error taxonomy;
 - capabilities/limits representation;
