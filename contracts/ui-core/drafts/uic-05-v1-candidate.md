@@ -702,7 +702,20 @@ UIC-00 coverage audit:
 
 `../traceability/uic-05-v1-candidate-coverage.json`
 
-## 21. No release yet
+## 21. MUST-level semantic closure
+
+UIC-05 leaves no unresolved MUST-level semantic choice needed by either implementation.
+
+The remaining planner decisions are deliberately implementation/conformance/release work:
+
+- UIC-06: adapt the frozen UI to this candidate;
+- UIC-07: prove Core conformance to this candidate;
+- UIC-08: publish immutable release packaging/tag after both are accepted.
+
+Those gates may discover a defect and force the candidate back to an earlier UIC gate, but
+they are not placeholders for an intentionally undefined v1 semantic rule.
+
+## 22. No release yet
 
 UIC-05 creates a reviewable implementable candidate only.
 
