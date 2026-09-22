@@ -9,6 +9,11 @@
  *
  * This header is a source/ABI candidate for joint review. It is not an
  * immutable released contract until UIC-08.
+ *
+ * The structs below are in-process C ABI objects only. They are NOT a wire,
+ * file, flash, IPC, or persistence serialization format and MUST NOT be
+ * persisted/transmitted by memcpy. Linked components must use a compatible
+ * platform C ABI and this same candidate/released header.
  */
 
 #include <stddef.h>
