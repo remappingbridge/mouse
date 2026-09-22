@@ -1,0 +1,103 @@
+{
+  "object_type": "sequence",
+  "vector_id": "live-remove-release-delete",
+  "records": [
+    {
+      "index": 0,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7200,
+          "kind": "CONNECTION_CHANGED",
+          "connection_changed": {
+            "previous_current_mouse_id": 1,
+            "current_mouse_id": null,
+            "commit_revision": 301,
+            "reason": "REMOVE_RELEASE"
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 301,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "STANDARD"
+              }
+            ],
+            "current_mouse_id": null,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": null,
+            "operation": {
+              "activity_id": 5200,
+              "origin_intent_id": 1200,
+              "kind": "REMOVE",
+              "status": "PENDING",
+              "target_mouse_id": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 2,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7201,
+          "kind": "ACTIVITY_RESULT",
+          "activity_result": {
+            "activity_id": 5200,
+            "origin_intent_id": 1200,
+            "activity_kind": "REMOVE",
+            "terminal_status": "SUCCEEDED",
+            "commit_revision": 302
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 302,
+            "saved_mice": [],
+            "current_mouse_id": null,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": null,
+            "operation": {
+              "activity_id": 5200,
+              "origin_intent_id": 1200,
+              "kind": "REMOVE",
+              "status": "SUCCEEDED",
+              "target_mouse_id": 1
+            }
+          }
+        }
+      }
+    }
+  ]
+}
