@@ -1,0 +1,40 @@
+{
+  "fixture_id": "remove-offline-mouse-by-stable-id",
+  "snapshot_before": {
+    "revision": 7,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      },
+      {
+        "mouse_id": "mouse-2",
+        "name": "TRAVEL MOUSE",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  },
+  "submissions": [
+    {
+      "intent": {
+        "intent_id": "intent-007",
+        "kind": "REMOVE_MOUSE",
+        "target_mouse_id": "mouse-2"
+      },
+      "expected": {
+        "disposition": "ACCEPTED"
+      }
+    }
+  ]
+}
