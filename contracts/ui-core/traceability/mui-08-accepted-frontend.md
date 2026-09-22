@@ -55,3 +55,7 @@ Review the accepted frontend together with Core requirements and promote a minim
 4. **identity/version/capability information needed for compatibility**.
 
 No ABI/version is released by this traceability record.
+
+## Superseded by product freeze
+
+MUI-08 remains reconstruction traceability. Contract work after 2026-09-22 uses the later frozen UI Layout 1.0 reference in `ui-layout-v1.0.md`.

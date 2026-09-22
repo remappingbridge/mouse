@@ -44,8 +44,8 @@ Real search deadlines and operation completion are Core/product facts. The explo
 
 UI Lock is presentation ownership. MBR-08 explicitly allowed the Mouse data path to remain functional while the display/backlight is locked. The UI↔Core contract should therefore avoid treating Lock as transport teardown unless a later product decision changes that rule.
 
-## Next step
+## Superseded product input
 
-The frontend UX baseline is now accepted at MUI-08, so the original prerequisite "accepted UX" is satisfied.
+This MBR-08 draft remains historical. The active frontend product source is now frozen UI Layout 1.0 at `remappingbridge/mouse-ui@e8adad7919e931c92515bf655ef4050876a8e7a9`.
 
 Do **not** promote this historical draft verbatim. The next contract phase should derive a fresh release candidate from the accepted MUI-08 semantics, separate frontend-private state from true cross-boundary obligations, and validate that boundary against the future Core design before releasing v1.

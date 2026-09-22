@@ -1,32 +1,36 @@
 # UI ↔ Core contract
 
-Status: **DRAFTS ONLY — NO RELEASED VERSION**.
+Status: **DRAFT DEFINITION PROGRAM — NO RELEASED CONTRACT VERSION**.
 
-This boundary lets `mouse-ui` consume product state and emit semantic intentions without depending on BLE, USB, flash, GPIO, or other backend implementation details.
+This boundary lets `mouse-ui` consume product truth and emit semantic intentions without depending on BLE, USB, flash, GPIO, screen layout, or other implementation details.
 
 ## Directories
 
-- `drafts/` — proposals and exploratory boundary definitions;
-- `releases/` — immutable released contract versions once promoted;
-- `traceability/` — exact historical source documents that informed the first draft;
+- `drafts/` — proposals and working semantic/C-binding definitions;
+- `releases/` — immutable released versions once UIC validation is complete;
+- `traceability/` — accepted/historical product inputs;
 - `governance.md` — ownership and promotion rules;
 - `versioning.md` — compatibility/version policy.
 
-## Fundamental rule
-
-Frontend mocks are not automatically public contracts. A requirement discovered in UX becomes a cross-repository obligation only after explicit promotion here.
-
-
-## Accepted frontend input
-
-The current accepted frontend baseline is:
+## Active frontend source
 
 ~~~text
-remappingbridge/mouse-ui@537b0f6fdd188b283cf10648b1cc6dbdacbfe20d
-baseline/mui-08-accepted
-MUI-08 ACCEPTED
+remappingbridge/mouse-ui
+UI Layout 1.0
+main @ e8adad7919e931c92515bf655ef4050876a8e7a9
+release/ui-layout-v1.0 @ same commit
 ~~~
 
-See `traceability/mui-08-accepted-frontend.md`.
+Business behavior is documented in `mouse-ui/docs/product/ui-layout-v1.0.md`; implementation architecture in `mouse-ui/docs/architecture/ui-layout-v1.0.md`.
 
-This acceptance freezes a trustworthy UX/reference implementation for contract analysis. It does **not** make frontend-private Product View structs, mock intents/results, navigation enums, Inspector metadata, scenario controls, SDL behavior, or timing implementation details part of the public UI↔Core contract.
+Traceability: [`traceability/ui-layout-v1.0.md`](traceability/ui-layout-v1.0.md).
+
+Working contract draft: [`drafts/ui-layout-v1.0-semantic-boundary.md`](drafts/ui-layout-v1.0-semantic-boundary.md).
+
+## Fundamental rule
+
+Frontend mocks are not public contracts. Screen IDs, menu selection, Help, Lock, SDL, framebuffer, Inspector, scenario controls and private C structs remain frontend-owned unless a separate product decision explicitly promotes them.
+
+Likewise, BTstack/HCI/GATT handles, TinyUSB report structs, flash layout and hardware timing remain Core-private.
+
+Only semantic facts/actions/results required across the repository boundary belong here.

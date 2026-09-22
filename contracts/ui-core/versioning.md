@@ -17,6 +17,12 @@ Recommended scheme:
 
 Both `mouse-ui` and `mouse-core` should declare which released contract version they implement. The final `mouse` integration should pin compatible component revisions rather than track moving branches implicitly.
 
-## No release yet
+## Independent version spaces
 
-MBR-08 migration material remains under `drafts/` and `traceability/`. It is not `v1`.
+`UI Layout 1.0` is a frontend product/layout version. It is **not** `UI↔Core Contract v1.0.0`.
+
+The first contract release may eventually be named `v1.0.0`, but only after the UIC program validates both UI and Core sides. Until then, the semantic boundary remains a draft.
+
+## No contract release yet
+
+MBR-08/MUI material remains historical traceability. UI Layout 1.0 is the current accepted product input, but no released UI↔Core ABI/API exists yet.
