@@ -1,0 +1,72 @@
+{
+  "fixture_id": "search-timeout-correlated",
+  "initial_snapshot": {
+    "revision": 800,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": null,
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": {
+      "activity_id": "act-saved-search",
+      "origin_intent_id": "intent-saved-search",
+      "purpose": "SAVED",
+      "status": "RUNNING",
+      "candidate": null
+    },
+    "operation": null
+  },
+  "steps": [
+    {
+      "type": "timeout_commit",
+      "revision": 801,
+      "snapshot": {
+        "revision": 801,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "PASSTHROUGH"
+          }
+        ],
+        "current_mouse_id": null,
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": {
+          "activity_id": "act-saved-search",
+          "origin_intent_id": "intent-saved-search",
+          "purpose": "SAVED",
+          "status": "TIMED_OUT",
+          "candidate": null
+        },
+        "operation": null
+      },
+      "notifications": [
+        {
+          "notification_seq": 1200,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-saved-search",
+          "origin_intent_id": "intent-saved-search",
+          "activity_kind": "SAVED",
+          "terminal_status": "TIMED_OUT",
+          "commit_revision": 801
+        }
+      ]
+    }
+  ]
+}

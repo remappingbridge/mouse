@@ -1,10 +1,10 @@
 # UI Layout 1.0 — UI ↔ Core semantic boundary draft
 
-Status: **WORKING DRAFT — UIC-02 INTENT CANDIDATE — NOT RELEASED**.
+Status: **WORKING DRAFT — UIC-03 ASYNC CANDIDATE — NOT RELEASED**.
 
 Source: frozen `mouse-ui` UI Layout 1.0, `e8adad7919e931c92515bf655ef4050876a8e7a9`.
 
-UIC-00 established semantic ownership and UIC-01 established the accepted language-neutral Snapshot semantics. UIC-02 now defines the normative UI→Core intent vocabulary and submission semantics while leaving result delivery, C ABI, transport and backend implementation unfrozen.
+UIC-00 established semantic ownership, UIC-01 the Snapshot, and UIC-02 the accepted UI→Core intents. UIC-03 now defines normative asynchronous correlation, terminal results, cancellation and ordering while leaving threading, concrete delivery API, C ABI and backend implementation unfrozen.
 
 ## Goal
 
@@ -96,21 +96,34 @@ HOME, Back, Help, Lock, selection, pagination, screen transitions, Inspector and
 
 Language-neutral intent fixtures live under `contracts/ui-core/fixtures/uic-02/`.
 
-## 4. Candidate Core → UI results/events
+## 4. Normative async results and ownership
 
-The asynchronous model must support:
+UIC-03 defines the normative asynchronous model in:
 
-- authoritative Mouse connection changed/disconnected;
-- search found / timeout / failure / cancelled;
-- Pair New candidate qualification and handoff completion/failure;
-- profile apply success/failure/cancelled;
-- Custom apply success/failure/cancelled;
-- remove success/failure/cancelled;
-- any state revision or event correlation needed to reject stale/late outcomes.
+`contracts/ui-core/drafts/uic-03-async-results.md`
 
-A terminal result must identify the request/lifetime it completes. A result for abandoned ownership must not be interpreted as confirmation of a newer UI action.
+Core allocates a unique non-reused `activity_id` for every asynchronous activity and
+links it to the caller-owned `origin_intent_id`.
 
-## 5. Ordering and transaction semantics
+Terminal activity states are unique and correlated:
+
+- search: SUCCEEDED / TIMED_OUT / FAILED / CANCELLED;
+- operation: SUCCEEDED / FAILED / CANCELLED.
+
+Core exposes an ordered logical notification stream with `ACTIVITY_RESULT` and
+`CONNECTION_CHANGED` notifications. The concrete callback/poll/queue binding remains
+unfrozen.
+
+Cancellation is normative logical invalidation plus best-effort physical cancellation.
+If cancellation commits first, any later backend success cannot mutate confirmed product
+truth. If success commits first, a later cancellation is rejected because the activity
+is already terminal.
+
+Connection truth changes independently of screen state.
+
+Language-neutral race fixtures live under `contracts/ui-core/fixtures/uic-03/`.
+
+## 5. Normative ordering and commit points
 
 ### Single live authority
 
@@ -118,23 +131,33 @@ At most one Mouse is authoritative for product input at any instant.
 
 ### Pair New
 
-The old current Mouse may remain live while an unsaved candidate is qualified. Promotion of the candidate is a single logical handoff. Cancellation/timeout before handoff completion must not silently promote the candidate.
+PAIR_NEW search success only qualifies an unsaved candidate. A separate Core-owned
+HANDOFF activity performs promotion under the same originating intent. The old current
+Mouse remains authoritative until the atomic handoff success commit. The successful
+commit adds/validates the new saved record and changes authority to the new Mouse without
+any intermediate dual-authority revision.
 
 ### Profile apply
 
-The UI may present ACTIVE only after a correlated successful completion. What persistence mechanism produces that success is Core-local.
+Confirmed profile changes only in the correlated success commit. Pending, failed,
+cancelled or late/stale completions do not change confirmed profile.
 
-### Custom
+### Custom apply
 
-The UI owns the editable draft and dirty state. The shared contract carries only the semantic Custom data needed to request/confirm application and to recover confirmed persistent state.
+Confirmed global Custom mapping and the Mouse's confirmed CUSTOM profile change together
+in one successful correlated commit.
 
 ### Removal
 
-Removal is addressed by stable Mouse identity, not by current list index. If the target is the live Mouse, successful completion semantically implies that it no longer remains authoritative. The exact transport and credential cleanup procedure is Core-local.
+Offline removal deletes the saved record at its success commit. Live removal first
+releases current authority in an earlier semantic commit, then deletes the saved record
+in the removal success commit.
 
 ### Cancellation and stale/late outcomes
 
-Leaving the UX state that owns an asynchronous action may abandon that action. The shared boundary must let the UI distinguish results belonging to abandoned work from results belonging to the current request. UIC-03 will decide the exact cancellation guarantee and result-delivery model.
+An accepted cancellation makes the target activity terminal CANCELLED logically. Backend
+work may finish later physically, but such completion cannot confirm abandoned or newer
+UI work.
 
 ## 6. Explicit UI-local boundary
 
@@ -231,17 +254,16 @@ Compatibility obligations identified for later gates:
 The authoritative unresolved-decision list is
 `contracts/ui-core/drafts/uic-00-unresolved-decisions.md`.
 
-UIC-01 resolved Snapshot schema/atomicity. UIC-02 resolves caller-owned intent identity allocation, atomic ACCEPTED/REPLAY/REJECTED submission semantics and whole-mapping Custom ownership.
+UIC-03 resolves logical notification ordering, Core-owned activity identity, cancellation
+guarantees and stale/late handling.
 
 Still deferred:
 
-- concrete intent/activity ID type and width;
-- cancellation guarantee and async result delivery;
-- stale/late result retention;
-- exact timeout ownership;
+- concrete intent/activity/notification ID widths and encodings;
+- exact 8 s / 15 s clock/timer implementation ownership details;
 - public error taxonomy;
 - capability/limit representation;
 - exact C ABI, memory ownership and thread-safety;
 - version negotiation and compatibility rules.
 
-Those decisions belong to UIC-03 and later gates.
+Those decisions belong to UIC-04 and later gates.

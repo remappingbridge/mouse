@@ -1,0 +1,130 @@
+{
+  "fixture_id": "stale-old-operation-after-newer-work",
+  "initial_snapshot": {
+    "revision": 200,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  },
+  "steps": [
+    {
+      "type": "old_activity_cancelled",
+      "revision": 201,
+      "activity_id": "act-old",
+      "origin_intent_id": "intent-old",
+      "notifications": [
+        {
+          "notification_seq": 600,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-old",
+          "origin_intent_id": "intent-old",
+          "activity_kind": "PROFILE_APPLY",
+          "terminal_status": "CANCELLED",
+          "commit_revision": 201,
+          "cancel_intent_id": "intent-cancel-old"
+        }
+      ]
+    },
+    {
+      "type": "new_activity_started",
+      "revision": 202,
+      "activity_id": "act-new",
+      "origin_intent_id": "intent-new",
+      "snapshot": {
+        "revision": 202,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "PASSTHROUGH"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-new",
+          "origin_intent_id": "intent-new",
+          "kind": "PROFILE_APPLY",
+          "status": "PENDING",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": "ESCAPE",
+          "requested_custom": null
+        }
+      }
+    },
+    {
+      "type": "late_backend_completion",
+      "activity_id": "act-old",
+      "backend_status": "SUCCEEDED",
+      "expected": {
+        "new_commit": false,
+        "does_not_complete_activity_id": "act-new",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    },
+    {
+      "type": "new_success_commit",
+      "revision": 203,
+      "snapshot": {
+        "revision": 203,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "ESCAPE"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-new",
+          "origin_intent_id": "intent-new",
+          "kind": "PROFILE_APPLY",
+          "status": "SUCCEEDED",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": "ESCAPE",
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 601,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-new",
+          "origin_intent_id": "intent-new",
+          "activity_kind": "PROFILE_APPLY",
+          "terminal_status": "SUCCEEDED",
+          "commit_revision": 203
+        }
+      ]
+    }
+  ]
+}

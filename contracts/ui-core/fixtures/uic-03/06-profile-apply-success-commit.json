@@ -1,0 +1,76 @@
+{
+  "fixture_id": "profile-apply-success-commit",
+  "initial_snapshot": {
+    "revision": 600,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": {
+      "activity_id": "act-profile",
+      "origin_intent_id": "intent-profile",
+      "kind": "PROFILE_APPLY",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-1",
+      "requested_profile": "STANDARD",
+      "requested_custom": null
+    }
+  },
+  "steps": [
+    {
+      "type": "success_commit",
+      "revision": 601,
+      "snapshot": {
+        "revision": 601,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "STANDARD"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-profile",
+          "origin_intent_id": "intent-profile",
+          "kind": "PROFILE_APPLY",
+          "status": "SUCCEEDED",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": "STANDARD",
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 1000,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-profile",
+          "origin_intent_id": "intent-profile",
+          "activity_kind": "PROFILE_APPLY",
+          "terminal_status": "SUCCEEDED",
+          "commit_revision": 601
+        }
+      ]
+    }
+  ]
+}

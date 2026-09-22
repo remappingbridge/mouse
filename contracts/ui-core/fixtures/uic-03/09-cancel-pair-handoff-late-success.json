@@ -1,0 +1,109 @@
+{
+  "fixture_id": "cancel-pair-handoff-late-success",
+  "initial_snapshot": {
+    "revision": 900,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": {
+      "activity_id": "act-pair-search-2",
+      "origin_intent_id": "intent-pair-2",
+      "purpose": "PAIR_NEW",
+      "status": "FOUND",
+      "candidate": {
+        "mouse_id": "mouse-2",
+        "name": "OFFICE",
+        "already_saved": false
+      }
+    },
+    "operation": {
+      "activity_id": "act-handoff-2",
+      "origin_intent_id": "intent-pair-2",
+      "kind": "HANDOFF",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-2",
+      "requested_profile": null,
+      "requested_custom": null
+    }
+  },
+  "steps": [
+    {
+      "type": "cancel_commit",
+      "revision": 901,
+      "cancel_intent_id": "intent-cancel-handoff",
+      "target_activity_id": "act-handoff-2",
+      "snapshot": {
+        "revision": 901,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "STANDARD"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": {
+          "activity_id": "act-pair-search-2",
+          "origin_intent_id": "intent-pair-2",
+          "purpose": "PAIR_NEW",
+          "status": "FOUND",
+          "candidate": {
+            "mouse_id": "mouse-2",
+            "name": "OFFICE",
+            "already_saved": false
+          }
+        },
+        "operation": {
+          "activity_id": "act-handoff-2",
+          "origin_intent_id": "intent-pair-2",
+          "kind": "HANDOFF",
+          "status": "CANCELLED",
+          "target_mouse_id": "mouse-2",
+          "requested_profile": null,
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 1300,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-handoff-2",
+          "origin_intent_id": "intent-pair-2",
+          "activity_kind": "HANDOFF",
+          "terminal_status": "CANCELLED",
+          "commit_revision": 901,
+          "cancel_intent_id": "intent-cancel-handoff"
+        }
+      ]
+    },
+    {
+      "type": "late_backend_completion",
+      "activity_id": "act-handoff-2",
+      "backend_status": "SUCCEEDED",
+      "expected": {
+        "new_commit": false,
+        "current_mouse_id": "mouse-1",
+        "candidate_saved": false
+      }
+    }
+  ]
+}

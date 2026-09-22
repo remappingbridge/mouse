@@ -1,0 +1,63 @@
+{
+  "fixture_id": "disconnect-during-active-profile",
+  "initial_snapshot": {
+    "revision": 300,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  },
+  "steps": [
+    {
+      "type": "physical_disconnect_commit",
+      "revision": 301,
+      "snapshot": {
+        "revision": 301,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "STANDARD"
+          }
+        ],
+        "current_mouse_id": null,
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": null
+      },
+      "notifications": [
+        {
+          "notification_seq": 700,
+          "kind": "CONNECTION_CHANGED",
+          "previous_current_mouse_id": "mouse-1",
+          "current_mouse_id": null,
+          "commit_revision": 301,
+          "reason": "PHYSICAL_DISCONNECT"
+        }
+      ],
+      "expected": {
+        "confirmed_profile_remains": "STANDARD",
+        "screen_state_not_in_contract": true
+      }
+    }
+  ]
+}

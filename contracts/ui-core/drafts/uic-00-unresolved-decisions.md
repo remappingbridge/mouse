@@ -1,6 +1,6 @@
 # UIC-00 — unresolved decisions
 
-Status: **OPEN ITEMS — UIC-01 AND UIC-02 DECISIONS RECORDED BELOW**.
+Status: **OPEN ITEMS — UIC-01 THROUGH UIC-03 DECISIONS RECORDED BELOW**.
 
 Source baseline: frozen `mouse-ui` UI Layout 1.0 at
 `e8adad7919e931c92515bf655ef4050876a8e7a9`.
@@ -10,9 +10,6 @@ UIC-00 intentionally does not resolve these questions. They are listed so later 
 | ID | Open decision | Why unresolved at UIC-00 | Earliest intended gate |
 |---|---|---|---|
 | OD-003 | Concrete intent/activity ID representation and width | Opaque identity semantics/allocation are fixed; binding type remains open | UIC-05 |
-| OD-006 | Result delivery model: poll/event/callback/queue | Async transport concern | UIC-03 |
-| OD-007 | Cancellation guarantee: hard cancel, best effort or logical abandonment | Requires async lifecycle design | UIC-03 |
-| OD-008 | Late-result retention/unknown-ID behavior | Requires result lifecycle design | UIC-03 |
 | OD-009 | Whether 8 s / 15 s timers are Core-owned, UI-owned or negotiated | Product timeout is fixed; timer placement is architecture | UIC-03/UIC-04 |
 | OD-010 | Error taxonomy and retryability | Needs Core failure classes and UI needs | UIC-04 |
 | OD-011 | Capability/limit representation | Needs product-vs-implementation decision | UIC-04 |
@@ -55,3 +52,19 @@ These resolutions do not freeze a C ABI or async transport API.
 ## Partially resolved by UIC-02
 
 - **OD-003 — Request/correlation identity:** opaque identity semantics and caller allocation are fixed. Concrete type/width remain open for the later binding.
+
+
+## Resolved by UIC-03
+
+- **OD-006 — Result delivery model:** resolved semantically as one ordered logical
+  notification stream per Core producer lifetime. Concrete poll/callback/queue binding is
+  intentionally not frozen.
+- **OD-007 — Cancellation guarantee:** resolved as immediate logical invalidation plus
+  best-effort physical/backend cancellation. Semantic commit order decides cancel-vs-success races.
+- **OD-008 — Late-result retention/unknown-ID behavior:** every activity has one terminal
+  transition; late backend completion after cancellation cannot mutate confirmed product
+  truth, and delayed notification cannot complete newer work.
+- **OD-003 activity side:** Core allocates unique non-reused `activity_id` values and
+  links every activity to one caller-owned `origin_intent_id`.
+
+Concrete ID representation/width remains OD-003 work for UIC-05.
