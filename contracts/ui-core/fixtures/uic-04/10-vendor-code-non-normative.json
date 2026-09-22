@@ -1,0 +1,20 @@
+{
+  "fixture_id": "vendor-code-never-public-category",
+  "provider_backend": {
+    "technology": "HID++",
+    "vendor_status": "0x09"
+  },
+  "public_result": {
+    "terminal_status": "FAILED",
+    "error": {
+      "category": "TEMPORARY_UNAVAILABLE",
+      "retryability": "LATER",
+      "visibility": "GENERIC_USER_FAILURE",
+      "diagnostic_code": "hidpp:0x09"
+    }
+  },
+  "expected": {
+    "public_category_is_vendor_independent": true,
+    "hidpp_capability_token_present": false
+  }
+}
