@@ -1,0 +1,35 @@
+{
+  "fixture_id": "removal-pending",
+  "snapshot": {
+    "revision": 50,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      },
+      {
+        "mouse_id": "mouse-2",
+        "name": "TRAVEL MOUSE",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": {
+      "activity_id": "operation-remove-1",
+      "kind": "REMOVE",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-1",
+      "requested_profile": null,
+      "requested_custom": null
+    }
+  }
+}

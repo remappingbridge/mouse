@@ -1,6 +1,6 @@
 # UIC-00 — unresolved decisions
 
-Status: **OPEN — DEFERRED TO LATER UIC GATES**.
+Status: **OPEN ITEMS — OD-001 AND OD-002 RESOLVED BY UIC-01**.
 
 Source baseline: frozen `mouse-ui` UI Layout 1.0 at
 `e8adad7919e931c92515bf655ef4050876a8e7a9`.
@@ -9,8 +9,6 @@ UIC-00 intentionally does not resolve these questions. They are listed so later 
 
 | ID | Open decision | Why unresolved at UIC-00 | Earliest intended gate |
 |---|---|---|---|
-| OD-001 | Exact language-neutral snapshot schema | UIC-00 identifies semantics, not field layout | UIC-01 |
-| OD-002 | Snapshot atomicity/revision semantics | Needs concrete snapshot model | UIC-01 |
 | OD-003 | Exact request/correlation ID type | Type/width/allocator are binding choices | UIC-02/UIC-03 |
 | OD-004 | Who allocates request IDs | Depends on intent API shape | UIC-02 |
 | OD-005 | Command submission model: sync acceptance vs queued | API/binding concern | UIC-02 |
@@ -41,3 +39,11 @@ These are no longer open:
 - BTstack/HCI/GATT/HOGP/HID++/TinyUSB/flash/GPIO/SPI details are Core-local;
 - stable Mouse identity, confirmed profile/current state, search/operation semantics, Custom confirmed state and async correlation are shared-contract semantics;
 - private `mouse-ui` and `mouse-core` implementation types are not normative contract types.
+
+
+## Resolved by UIC-01
+
+- **OD-001 — Exact language-neutral snapshot schema:** resolved by `drafts/uic-01-snapshot-model.md`.
+- **OD-002 — Snapshot atomicity/revision semantics:** resolved as atomic immutable value semantics with monotonic revision within one producer lifetime.
+
+These resolutions do not freeze a C ABI or async transport API.

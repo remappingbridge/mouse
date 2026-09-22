@@ -1,0 +1,33 @@
+{
+  "fixture_id": "dirty-custom-ui-local",
+  "ui_local_context": {
+    "custom_draft_dirty": true,
+    "custom_draft": {
+      "LEFT": "FORWARD",
+      "RIGHT": "BACKWARD",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "LEFT",
+      "BACKWARD": "RIGHT"
+    }
+  },
+  "snapshot": {
+    "revision": 40,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "CUSTOM"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": null
+  }
+}
