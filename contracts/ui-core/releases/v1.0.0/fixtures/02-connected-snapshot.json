@@ -1,0 +1,31 @@
+{
+  "object_type": "snapshot_read",
+  "value": {
+    "kind": "SNAPSHOT",
+    "snapshot": {
+      "revision": 100,
+      "saved_mice": [
+        {
+          "mouse_id": 1,
+          "name": "LIFT",
+          "confirmed_profile": "STANDARD"
+        },
+        {
+          "mouse_id": 2,
+          "name": "OFFICE",
+          "confirmed_profile": "PASSTHROUGH"
+        }
+      ],
+      "current_mouse_id": 1,
+      "custom_confirmed": {
+        "LEFT": "LEFT",
+        "RIGHT": "RIGHT",
+        "MIDDLE": "MIDDLE",
+        "FORWARD": "FORWARD",
+        "BACKWARD": "BACKWARD"
+      },
+      "search": null,
+      "operation": null
+    }
+  }
+}
