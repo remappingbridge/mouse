@@ -1,0 +1,134 @@
+{
+  "object_type": "sequence",
+  "vector_id": "pair-handoff-success",
+  "records": [
+    {
+      "index": 0,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 200,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "STANDARD"
+              }
+            ],
+            "current_mouse_id": 1,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": {
+              "activity_id": 5100,
+              "origin_intent_id": 1100,
+              "purpose": "PAIR_NEW",
+              "status": "FOUND",
+              "candidate": {
+                "mouse_id": 2,
+                "name": "OFFICE",
+                "already_saved": false
+              }
+            },
+            "operation": {
+              "activity_id": 5101,
+              "origin_intent_id": 1100,
+              "kind": "HANDOFF",
+              "status": "PENDING",
+              "target_mouse_id": 2
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 1,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7100,
+          "kind": "CONNECTION_CHANGED",
+          "connection_changed": {
+            "previous_current_mouse_id": 1,
+            "current_mouse_id": 2,
+            "commit_revision": 201,
+            "reason": "HANDOFF"
+          }
+        }
+      }
+    },
+    {
+      "index": 2,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7101,
+          "kind": "ACTIVITY_RESULT",
+          "activity_result": {
+            "activity_id": 5101,
+            "origin_intent_id": 1100,
+            "activity_kind": "HANDOFF",
+            "terminal_status": "SUCCEEDED",
+            "commit_revision": 201
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 201,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "STANDARD"
+              },
+              {
+                "mouse_id": 2,
+                "name": "OFFICE",
+                "confirmed_profile": "PASSTHROUGH"
+              }
+            ],
+            "current_mouse_id": 2,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": {
+              "activity_id": 5100,
+              "origin_intent_id": 1100,
+              "purpose": "PAIR_NEW",
+              "status": "FOUND",
+              "candidate": {
+                "mouse_id": 2,
+                "name": "OFFICE",
+                "already_saved": false
+              }
+            },
+            "operation": {
+              "activity_id": 5101,
+              "origin_intent_id": 1100,
+              "kind": "HANDOFF",
+              "status": "SUCCEEDED",
+              "target_mouse_id": 2
+            }
+          }
+        }
+      }
+    }
+  ]
+}
