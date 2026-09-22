@@ -16,11 +16,10 @@
     },
     {
       "source": "ABCDEFGHIJKLMNO🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂",
-      "expected": {
-        "valid_utf8": true,
-        "max_utf8_bytes": 63,
-        "never_split_utf8_scalar": true
-      }
+      "source_utf8_bytes": 67,
+      "expected_contract_name": "ABCDEFGHIJKLMNO🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂🙂",
+      "expected_utf8_bytes": 63,
+      "rule": "truncate at UTF-8 scalar boundary; do not split the thirteenth emoji"
     }
   ]
 }
