@@ -1,0 +1,40 @@
+{
+  "fixture_id": "cancel-search-activity",
+  "snapshot_before": {
+    "revision": 4,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": null,
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": {
+      "activity_id": "activity-search-1",
+      "purpose": "SAVED",
+      "status": "RUNNING",
+      "candidate": null
+    },
+    "operation": null
+  },
+  "submissions": [
+    {
+      "intent": {
+        "intent_id": "intent-004",
+        "kind": "CANCEL_ACTIVITY",
+        "target_activity_id": "activity-search-1"
+      },
+      "expected": {
+        "disposition": "ACCEPTED"
+      }
+    }
+  ]
+}
