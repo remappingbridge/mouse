@@ -1,0 +1,88 @@
+{
+  "fixture_id": "custom-apply-success-commit",
+  "initial_snapshot": {
+    "revision": 700,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": {
+      "activity_id": "act-custom",
+      "origin_intent_id": "intent-custom",
+      "kind": "CUSTOM_APPLY",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-1",
+      "requested_profile": "CUSTOM",
+      "requested_custom": {
+        "LEFT": "FORWARD",
+        "RIGHT": "BACKWARD",
+        "MIDDLE": "MIDDLE",
+        "FORWARD": "LEFT",
+        "BACKWARD": "RIGHT"
+      }
+    }
+  },
+  "steps": [
+    {
+      "type": "success_commit",
+      "revision": 701,
+      "snapshot": {
+        "revision": 701,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "CUSTOM"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "FORWARD",
+          "RIGHT": "BACKWARD",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "LEFT",
+          "BACKWARD": "RIGHT"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-custom",
+          "origin_intent_id": "intent-custom",
+          "kind": "CUSTOM_APPLY",
+          "status": "SUCCEEDED",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": "CUSTOM",
+          "requested_custom": {
+            "LEFT": "FORWARD",
+            "RIGHT": "BACKWARD",
+            "MIDDLE": "MIDDLE",
+            "FORWARD": "LEFT",
+            "BACKWARD": "RIGHT"
+          }
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 1100,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-custom",
+          "origin_intent_id": "intent-custom",
+          "activity_kind": "CUSTOM_APPLY",
+          "terminal_status": "SUCCEEDED",
+          "commit_revision": 701
+        }
+      ]
+    }
+  ]
+}
