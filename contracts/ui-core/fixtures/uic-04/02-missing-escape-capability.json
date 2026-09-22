@@ -1,0 +1,46 @@
+{
+  "fixture_id": "missing-required-escape-capability",
+  "provider": {
+    "contract": {
+      "major": 1,
+      "minor": 0
+    },
+    "limits": {
+      "max_saved_mice": 16,
+      "max_mouse_name_utf8_bytes": 63
+    },
+    "capabilities": [
+      "FIRST_DISCOVERY",
+      "SAVED_RECONNECT",
+      "PAIR_NEW",
+      "PROFILE_PASSTHROUGH",
+      "PROFILE_STANDARD",
+      "PROFILE_ESCAPE",
+      "PROFILE_CUSTOM",
+      "REMOVE_MOUSE"
+    ]
+  },
+  "consumer": {
+    "required_major": 1,
+    "minimum_minor": 0,
+    "required_capabilities": [
+      "FIRST_DISCOVERY",
+      "SAVED_RECONNECT",
+      "PAIR_NEW",
+      "PROFILE_PASSTHROUGH",
+      "PROFILE_STANDARD",
+      "PROFILE_ESCAPE",
+      "PROFILE_CUSTOM",
+      "REMOVE_MOUSE",
+      "ESCAPE_OUTPUT"
+    ]
+  },
+  "expected": {
+    "compatible": false,
+    "error": {
+      "category": "UNSUPPORTED",
+      "retryability": "NOT_RETRYABLE",
+      "visibility": "USER_ACTIONABLE"
+    }
+  }
+}
