@@ -27,6 +27,17 @@ Traceability: [`traceability/ui-layout-v1.0.md`](traceability/ui-layout-v1.0.md)
 
 Working contract draft: [`drafts/ui-layout-v1.0-semantic-boundary.md`](drafts/ui-layout-v1.0-semantic-boundary.md).
 
+Current accepted/candidate semantic layers:
+
+- UIC-01 Snapshot: `drafts/uic-01-snapshot-model.md`;
+- UIC-02 Intents: `drafts/uic-02-intent-model.md`;
+- UIC-03 Async results/ordering: `drafts/uic-03-async-results.md`;
+- UIC-04 capabilities/limits/errors candidate: `drafts/uic-04-capabilities-limits-errors.md`.
+
+Language-neutral fixtures live under `fixtures/uic-01/` through `fixtures/uic-04/`.
+
+There is still **no released contract ABI/API**. UIC-05 is responsible for assembling the v1 candidate binding after UIC-04 acceptance.
+
 ## Fundamental rule
 
 Frontend mocks are not public contracts. Screen IDs, menu selection, Help, Lock, SDL, framebuffer, Inspector, scenario controls and private C structs remain frontend-owned unless a separate product decision explicitly promotes them.
