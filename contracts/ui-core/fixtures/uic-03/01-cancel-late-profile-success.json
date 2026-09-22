@@ -1,0 +1,89 @@
+{
+  "fixture_id": "cancel-late-profile-success",
+  "initial_snapshot": {
+    "revision": 100,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": {
+      "activity_id": "act-profile-old",
+      "origin_intent_id": "intent-profile-old",
+      "kind": "PROFILE_APPLY",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-1",
+      "requested_profile": "STANDARD",
+      "requested_custom": null
+    }
+  },
+  "steps": [
+    {
+      "type": "cancel_commit",
+      "revision": 101,
+      "cancel_intent_id": "intent-cancel-1",
+      "target_activity_id": "act-profile-old",
+      "snapshot": {
+        "revision": 101,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "PASSTHROUGH"
+          }
+        ],
+        "current_mouse_id": "mouse-1",
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-profile-old",
+          "origin_intent_id": "intent-profile-old",
+          "kind": "PROFILE_APPLY",
+          "status": "CANCELLED",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": "STANDARD",
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 500,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-profile-old",
+          "origin_intent_id": "intent-profile-old",
+          "activity_kind": "PROFILE_APPLY",
+          "terminal_status": "CANCELLED",
+          "commit_revision": 101,
+          "cancel_intent_id": "intent-cancel-1"
+        }
+      ]
+    },
+    {
+      "type": "late_backend_completion",
+      "activity_id": "act-profile-old",
+      "backend_status": "SUCCEEDED",
+      "expected": {
+        "new_commit": false,
+        "new_notification": false,
+        "confirmed_profile": "PASSTHROUGH"
+      }
+    }
+  ]
+}
