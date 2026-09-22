@@ -1,0 +1,112 @@
+{
+  "fixture_id": "live-remove-release-before-delete",
+  "initial_snapshot": {
+    "revision": 500,
+    "saved_mice": [
+      {
+        "mouse_id": "mouse-1",
+        "name": "LIFT",
+        "confirmed_profile": "STANDARD"
+      }
+    ],
+    "current_mouse_id": "mouse-1",
+    "custom_confirmed": {
+      "LEFT": "LEFT",
+      "RIGHT": "RIGHT",
+      "MIDDLE": "MIDDLE",
+      "FORWARD": "FORWARD",
+      "BACKWARD": "BACKWARD"
+    },
+    "search": null,
+    "operation": {
+      "activity_id": "act-remove",
+      "origin_intent_id": "intent-remove",
+      "kind": "REMOVE",
+      "status": "PENDING",
+      "target_mouse_id": "mouse-1",
+      "requested_profile": null,
+      "requested_custom": null
+    }
+  },
+  "steps": [
+    {
+      "type": "authority_release_commit",
+      "revision": 501,
+      "snapshot": {
+        "revision": 501,
+        "saved_mice": [
+          {
+            "mouse_id": "mouse-1",
+            "name": "LIFT",
+            "confirmed_profile": "STANDARD"
+          }
+        ],
+        "current_mouse_id": null,
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-remove",
+          "origin_intent_id": "intent-remove",
+          "kind": "REMOVE",
+          "status": "PENDING",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": null,
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 900,
+          "kind": "CONNECTION_CHANGED",
+          "previous_current_mouse_id": "mouse-1",
+          "current_mouse_id": null,
+          "commit_revision": 501,
+          "reason": "REMOVE_RELEASE"
+        }
+      ]
+    },
+    {
+      "type": "removal_commit",
+      "revision": 502,
+      "snapshot": {
+        "revision": 502,
+        "saved_mice": [],
+        "current_mouse_id": null,
+        "custom_confirmed": {
+          "LEFT": "LEFT",
+          "RIGHT": "RIGHT",
+          "MIDDLE": "MIDDLE",
+          "FORWARD": "FORWARD",
+          "BACKWARD": "BACKWARD"
+        },
+        "search": null,
+        "operation": {
+          "activity_id": "act-remove",
+          "origin_intent_id": "intent-remove",
+          "kind": "REMOVE",
+          "status": "SUCCEEDED",
+          "target_mouse_id": "mouse-1",
+          "requested_profile": null,
+          "requested_custom": null
+        }
+      },
+      "notifications": [
+        {
+          "notification_seq": 901,
+          "kind": "ACTIVITY_RESULT",
+          "activity_id": "act-remove",
+          "origin_intent_id": "intent-remove",
+          "activity_kind": "REMOVE",
+          "terminal_status": "SUCCEEDED",
+          "commit_revision": 502
+        }
+      ]
+    }
+  ]
+}
