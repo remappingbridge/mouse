@@ -98,7 +98,8 @@ Only a confirmed/persisted semantic Custom mapping belongs here.
 
 When present it contains:
 
-- `activity_id` — opaque correlation identity for this activity; UIC-02 fixes caller-owned intent identity semantics, while the exact activity/result correlation lifecycle is deferred to UIC-03 and concrete representation to UIC-05;
+- `activity_id` — Core-owned unique non-reused identity for this search activity;
+- `origin_intent_id` — caller-owned intent identity that created this activity;
 - `purpose` — `FIRST | SAVED | PAIR_NEW`;
 - `status` — `RUNNING | FOUND | TIMED_OUT | FAILED | CANCELLED`;
 - optional `candidate` when a candidate is semantically known.
@@ -123,7 +124,8 @@ Normative rules:
 
 When present it contains:
 
-- `activity_id` — opaque correlation identity; its relationship to the originating intent and terminal results is finalized by UIC-03;
+- `activity_id` — Core-owned unique non-reused identity for this operation activity;
+- `origin_intent_id` — caller-owned intent identity that created this activity;
 - `kind` — `PROFILE_APPLY | CUSTOM_APPLY | REMOVE | HANDOFF`;
 - `status` — `PENDING | SUCCEEDED | FAILED | CANCELLED`;
 - `target_mouse_id` — semantic operation subject;
@@ -137,7 +139,7 @@ Rules by kind:
 - `REMOVE`: requested profile/custom data are absent;
 - `HANDOFF`: target may identify an unsaved Pair New candidate while the old current Mouse remains authoritative until handoff success.
 
-The exact lifecycle/retention of terminal operation states is deferred to UIC-03. UIC-01 only requires that a Snapshot can represent them.
+UIC-03 defines each activity as having exactly one terminal transition. Terminal operation state may remain visible until superseded by later same-slot work; no hidden timer-based eviction is required.
 
 ## 3. Atomic consistency
 
@@ -200,7 +202,7 @@ Snapshot semantics are value semantics:
 - a later change is represented by a later revision;
 - consumers may cache older Snapshots for comparison/testing;
 - pointer ownership, allocation, copying and buffer lifetime are language-binding concerns deferred to UIC-05;
-- event/callback delivery is not required by this model and is deferred to UIC-03.
+- UIC-03 adds a transport-independent ordered logical notification stream correlated by activity and Snapshot revision; callback/poll/queue mechanics remain binding-specific.
 
 ## 8. Fields explicitly forbidden from Snapshot
 
@@ -295,9 +297,8 @@ UIC-01 resolves:
 
 Still deferred:
 
-- request/activity ID representation/allocation;
-- intent submission model;
-- async event/result delivery and cancellation guarantees;
+- concrete request/activity ID representation widths/encodings;
+- binding-specific notification transport;
 - error taxonomy;
 - capabilities/limits encoding;
 - C ABI and memory ownership.
