@@ -2,70 +2,86 @@
 
 ## Drafts
 
-Drafts have no compatibility guarantee. They may be rewritten, split, or discarded while UX/Core exploration continues.
+Drafts have no compatibility guarantee. They may be rewritten, split or discarded while
+contract work is still exploratory.
 
-## Releases
+Released components MUST depend on a release directory, not a draft.
 
-Released contracts use explicit versions. A release directory is immutable after publication except for clearly non-semantic typo fixes that do not change interpretation.
+## Released version
 
-Recommended scheme:
+The first released boundary is:
 
-- `v1.0.0` — first integrated stable boundary;
-- patch — clarification with no semantic/API change;
+~~~text
+UI↔Core Contract v1.0.0
+descriptor major = 1
+descriptor minor = 0
+path = contracts/ui-core/releases/v1.0.0/
+~~~
+
+## Semantic version policy
+
+- patch — clarification or compatible correction that does not break the published API;
 - minor — backward-compatible optional additions;
-- major — incompatible semantic or structural changes.
+- major — incompatible semantic, structural or required-capability change.
 
-## UIC-04 semantic discovery rules
+The v1.0.0 directory itself is immutable. Even a clarification is published as a new
+version rather than edited in place.
 
-Before a concrete release binding exists, the candidate semantic descriptor uses
-`major = 1, minor = 0`.
+## Runtime compatibility
 
 Compatibility requires:
 
-- equal major;
+- equal contract major;
 - provider minor >= consumer minimum minor;
-- all consumer-required semantic capability tokens present;
+- all consumer-required semantic capabilities present;
 - public major-1 limits compatible with the consumer.
 
-For the frozen UI Layout 1.0 / contract-major-1 line, the public limits are fixed:
+For contract major 1 the public limits are fixed:
 
 - maximum 16 saved Mouse records;
 - maximum 63 UTF-8 bytes for a semantic Mouse name.
 
-A minor release may add optional fields/capabilities that older consumers can ignore, but
-must not increase these fixed capacities, remove required v1 capabilities, or repurpose
-existing enum/error meanings. Such changes require a new major.
+A compatible minor may add optional fields/capabilities that older consumers can ignore.
+It MUST NOT remove required v1 capabilities, repurpose existing enum/error meanings, or
+increase fixed major-1 capacities in a way older bounded consumers cannot represent.
 
-Concrete C constants, ABI representation and the final released version number remain
-UIC-05/UIC-08 work.
+## C binding extension policy
 
-Both `mouse-ui` and `mouse-core` should declare which released contract version they implement. The final `mouse` integration should pin compatible component revisions rather than track moving branches implicitly.
+The v1 C binding uses:
+
+- explicit fixed-width integers;
+- bounded inline arrays;
+- top-level `struct_size`;
+- zeroed reserved fields.
+
+Compatible minors may append top-level trailing fields or consume explicitly reserved
+embedded storage without changing existing offsets/semantics. Incompatible representation
+changes require a new major.
+
+## Component declarations
+
+Both `mouse-ui` and `mouse-core` carry a machine-readable `ui-core-contract.json`.
+
+A consumer declaration records:
+
+- release version;
+- required major/minimum minor;
+- required capabilities/limits;
+- canonical release path/source.
+
+A provider declaration records:
+
+- release version;
+- provided major/minor;
+- provided capabilities/limits;
+- canonical release path/source.
+
+CI validates each declaration against the released header/package.
 
 ## Independent version spaces
 
-`UI Layout 1.0` is a frontend product/layout version. It is **not** `UI↔Core Contract v1.0.0`.
+`UI Layout 1.0` is a frontend product/layout version and is not the same version space
+as `UI↔Core Contract v1.0.0`.
 
-The first contract release may eventually be named `v1.0.0`, but only after the UIC program validates both UI and Core sides. Until then, the semantic boundary remains a draft.
-
-## No contract release yet
-
-MBR-08/MUI material remains historical traceability. UI Layout 1.0 is the current accepted product input, but no released UI↔Core ABI/API exists yet.
-
-
-## UIC-05 candidate binding
-
-The UIC-05 candidate binds the semantic descriptor to candidate constants:
-
-~~~text
-contract major = 1
-contract minor = 0
-~~~
-
-This identifies the candidate semantic/API line, not an immutable published release tag.
-
-The proposed C binding uses size-tagged top-level structs, zeroed reserved storage and
-bounded fixed-width fields. A compatible minor may append top-level trailing fields or
-consume reserved embedded storage only without changing existing offsets/semantics.
-
-The final immutable release directory/tag remains a UIC-08 decision after UI and Core
-conformance gates.
+A future layout change does not automatically imply a contract change, and a contract
+release does not automatically imply a layout change.
