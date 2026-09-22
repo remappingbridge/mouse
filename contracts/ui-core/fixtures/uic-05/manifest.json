@@ -1,0 +1,19 @@
+{
+  "candidate": "1.0",
+  "semantic_spec": "../../drafts/uic-05-v1-candidate.md",
+  "schema": "../../drafts/uic-05-v1.schema.json",
+  "c_binding": "../../drafts/uic-05-c-binding.h",
+  "vectors": [
+    "01-descriptor.json",
+    "02-connected-snapshot.json",
+    "03-profile-apply-sequence.json",
+    "04-limit-rejection.json",
+    "05-cancel-late-sequence.json",
+    "06-pair-handoff-sequence.json",
+    "07-live-remove-sequence.json",
+    "08-snapshot-unavailable.json",
+    "09-custom-apply-sequence.json",
+    "10-search-timeout.json",
+    "11-authority-lost-error.json"
+  ]
+}
