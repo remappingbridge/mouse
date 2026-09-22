@@ -1,10 +1,10 @@
 # UI Layout 1.0 — UI ↔ Core semantic boundary draft
 
-Status: **WORKING DRAFT — UIC-01 SNAPSHOT CANDIDATE — NOT RELEASED**.
+Status: **WORKING DRAFT — UIC-02 INTENT CANDIDATE — NOT RELEASED**.
 
 Source: frozen `mouse-ui` UI Layout 1.0, `e8adad7919e931c92515bf655ef4050876a8e7a9`.
 
-UIC-00 established semantic ownership. UIC-01 now defines the normative language-neutral Snapshot semantics while still leaving C ABI, transport API, memory layout, threading model, callback model and backend implementation unfrozen.
+UIC-00 established semantic ownership and UIC-01 established the accepted language-neutral Snapshot semantics. UIC-02 now defines the normative UI→Core intent vocabulary and submission semantics while leaving result delivery, C ABI, transport and backend implementation unfrozen.
 
 ## Goal
 
@@ -70,20 +70,31 @@ Language-neutral fixtures live under `contracts/ui-core/fixtures/uic-01/`.
 
 Exact C layout, activity-ID representation, async delivery and cancellation semantics remain deferred.
 
-## 3. Candidate UI → Core semantic intents
+## 3. Normative UI → Core semantic intents
 
-Cross-boundary intents required by the frozen behavior are:
+UIC-02 defines the normative command vocabulary in:
 
-- start initial Mouse discovery/qualification;
-- start saved-Mouse reconnect search;
-- start Pair New with unsaved-only semantics;
-- cancel/abandon the currently owned search;
-- apply Passthrough, Standard or Escape to the authoritative Mouse;
-- commit/apply the confirmed Custom mapping/template according to the final Custom ownership decision;
-- request removal of a saved Mouse by stable identity;
-- abandon/cancel an owned asynchronous operation where the final contract supports explicit cancellation.
+`contracts/ui-core/drafts/uic-02-intent-model.md`
 
-The following are explicitly **not** Core intents: HOME navigation, Back, Help, Lock, list selection, pagination, editor cursor movement, screen transitions, Inspector operations and desktop lab controls.
+The complete intent set is:
+
+- `START_FIRST_SEARCH`
+- `START_SAVED_SEARCH`
+- `START_PAIR_NEW`
+- `CANCEL_ACTIVITY`
+- `APPLY_PROFILE`
+- `APPLY_CUSTOM`
+- `REMOVE_MOUSE`
+
+Every intent carries an opaque caller-generated `intent_id`. Replaying the same ID with identical payload is safe and cannot duplicate side effects; reusing the same ID with different payload is invalid.
+
+Mouse-targeting intents use stable `mouse_id`, never list/page indexes.
+
+Custom editing and dirty draft state remain UI-local. Only `APPLY_CUSTOM` crosses the boundary, carrying the complete five-source mapping atomically.
+
+HOME, Back, Help, Lock, selection, pagination, screen transitions, Inspector and lab controls are not Core intents. When those UI-local actions abandon shared asynchronous work, the only shared command is `CANCEL_ACTIVITY` for the owned activity.
+
+Language-neutral intent fixtures live under `contracts/ui-core/fixtures/uic-02/`.
 
 ## 4. Candidate Core → UI results/events
 
@@ -220,18 +231,17 @@ Compatibility obligations identified for later gates:
 The authoritative unresolved-decision list is
 `contracts/ui-core/drafts/uic-00-unresolved-decisions.md`.
 
-UIC-01 resolves the language-neutral Snapshot schema and Snapshot atomicity/revision semantics.
+UIC-01 resolved Snapshot schema/atomicity. UIC-02 resolves caller-owned intent identity allocation, atomic ACCEPTED/REPLAY/REJECTED submission semantics and whole-mapping Custom ownership.
 
 Still deferred:
 
-- request/activity-ID type and allocation owner;
-- intent submission model;
+- concrete intent/activity ID type and width;
 - cancellation guarantee and async result delivery;
-- Custom commit granularity;
+- stale/late result retention;
 - exact timeout ownership;
-- error taxonomy;
+- public error taxonomy;
 - capability/limit representation;
 - exact C ABI, memory ownership and thread-safety;
 - version negotiation and compatibility rules.
 
-Those decisions belong to UIC-02 and later gates.
+Those decisions belong to UIC-03 and later gates.
