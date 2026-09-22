@@ -140,3 +140,14 @@ The UIC-05 validation workflow checks:
 
 Any future change to the schema or C binding MUST update both sides and the conformance
 vectors in the same candidate change.
+
+
+## ABI versus serialization
+
+The C structs are an in-process binding only.
+
+They MUST NOT be used as a disk/flash/network/wire format because compiler/platform
+padding and ABI rules are outside the semantic contract. Both linked components must use
+the same released header and a compatible platform C ABI.
+
+The JSON schema is likewise conformance notation, not a runtime transport format.
