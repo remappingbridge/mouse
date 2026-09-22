@@ -502,7 +502,8 @@ They cover:
 - authority-lost FAILED result;
 - persistence FAILED result with private diagnostic;
 - timeout as terminal status without an error object;
-- unknown vendor diagnostic remaining non-normative.
+- unknown vendor diagnostic remaining non-normative;
+- descriptor incompatibility caused by silently changed major-1 limits.
 
 ## 14. Compatibility analysis
 
