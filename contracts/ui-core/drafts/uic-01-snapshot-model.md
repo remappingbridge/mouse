@@ -257,7 +257,35 @@ A valid UIC-01 Snapshot satisfies all of the following:
 11. UI-local draft/dirty/navigation/pixel state is absent;
 12. Snapshot publication is atomic per revision.
 
-## 11. Decisions resolved by UIC-01
+## 11. Traceability to accepted UIC-00 semantics
+
+| Snapshot semantic | UIC-00 rules |
+|---|---|
+| saved Mouse identity/name/confirmed profile | BR-004, BR-011, BR-012, BR-013, BR-065, BR-066 |
+| zero/one current authority | BR-009, BR-032, BR-056, BR-068 |
+| confirmed global Custom mapping | BR-015, BR-053, BR-060, BR-061 |
+| FIRST/SAVED/PAIR_NEW search state | BR-020, BR-021, BR-026, BR-027, BR-031, BR-033, BR-035 |
+| profile/Custom operation state | BR-050, BR-051, BR-052, BR-054, BR-061 |
+| REMOVE state and target identity | BR-066, BR-067, BR-068, BR-071 |
+| HANDOFF state | BR-032, BR-034, BR-035 |
+| revision/atomicity | derived from BR-016, BR-030, BR-054, BR-060 and the requirement that screen state never be product truth |
+
+## 12. Compatibility analysis
+
+UIC-01 freezes semantic meaning only inside the working contract program; it still creates no released ABI.
+
+Compatibility conclusions for later gates:
+
+- changing serialization array order for `saved_mice` is non-semantic because the collection is a set;
+- changing a private Core identity representation is allowed if stable `mouse_id` semantics are preserved at the boundary;
+- adding UI-private state to Snapshot is not compatible because it violates the ownership split;
+- collapsing confirmed profile into requested/pending profile is not compatible;
+- allowing more than one current authority is not compatible;
+- changing profile, Custom source or Custom target value domains requires explicit contract review;
+- exact integer widths, string encodings, memory layout and transport framing remain unfrozen until later gates;
+- a Core implementation may be completely rewritten without contract impact if it produces semantically equivalent atomic Snapshots.
+
+## 13. Decisions resolved by UIC-01
 
 UIC-01 resolves:
 
