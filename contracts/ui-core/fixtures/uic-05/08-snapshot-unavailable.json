@@ -1,0 +1,13 @@
+{
+  "object_type": "snapshot_read",
+  "value": {
+    "kind": "UNAVAILABLE",
+    "error": {
+      "category": "PERSISTENCE_FAILURE",
+      "retryability": "LATER",
+      "visibility": "GENERIC_USER_FAILURE",
+      "diagnostic_code": "storage:migration",
+      "diagnostic_message": "opaque provider diagnostic"
+    }
+  }
+}

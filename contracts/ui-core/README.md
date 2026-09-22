@@ -45,3 +45,17 @@ Frontend mocks are not public contracts. Screen IDs, menu selection, Help, Lock,
 Likewise, BTstack/HCI/GATT handles, TinyUSB report structs, flash layout and hardware timing remain Core-private.
 
 Only semantic facts/actions/results required across the repository boundary belong here.
+
+## UIC-05 v1 candidate
+
+The current complete reviewable candidate is:
+
+- semantic spec: `drafts/uic-05-v1-candidate.md`;
+- machine schema: `drafts/uic-05-v1.schema.json`;
+- C binding: `drafts/uic-05-c-binding.h`;
+- schema/C mapping: `drafts/uic-05-schema-c-equivalence.md`;
+- conformance vectors: `fixtures/uic-05/`;
+- validator: `tools/validate_uic05.py`;
+- UIC-00 coverage: `traceability/uic-05-v1-candidate-coverage.json`.
+
+This is **not** a released contract. `releases/` remains untouched until UIC-08.

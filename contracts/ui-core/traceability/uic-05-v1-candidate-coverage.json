@@ -1,0 +1,712 @@
+{
+  "candidate": "UI-Core Contract v1 candidate",
+  "candidate_spec": "../drafts/uic-05-v1-candidate.md",
+  "source_inventory": "uic-00-semantic-inventory.md",
+  "source_rule_count": 88,
+  "rules": [
+    {
+      "id": "BR-001",
+      "source": "§1",
+      "rule": "Product presents a local 240×240 interface",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-002",
+      "source": "§1",
+      "rule": "Product connects a Bluetooth Mouse",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§1–§14 consolidated shared semantics"
+    },
+    {
+      "id": "BR-003",
+      "source": "§1",
+      "rule": "Product chooses a remapping profile",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-004",
+      "source": "§1",
+      "rule": "Product keeps saved devices",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§7 Snapshot, §10 intents"
+    },
+    {
+      "id": "BR-005",
+      "source": "§1",
+      "rule": "Product recovers after disconnect",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§2 scalar identities, §7 Snapshot, §12 notifications, §13 commit points"
+    },
+    {
+      "id": "BR-006",
+      "source": "§1",
+      "rule": "HAT teaching behavior exists",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-007",
+      "source": "§1",
+      "rule": "Lock hides presentation without redefining product state",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-008",
+      "source": "§2",
+      "rule": "Reference product supports up to 16 saved Mouse records",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§7 Snapshot, §10 intents"
+    },
+    {
+      "id": "BR-009",
+      "source": "§2",
+      "rule": "Zero or one Mouse is authoritative/connected at a time",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§2 scalar identities, §7 Snapshot, §12 notifications, §13 commit points"
+    },
+    {
+      "id": "BR-010",
+      "source": "§2",
+      "rule": "Connected Mouse appears first in Saved Devices",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-011",
+      "source": "§2",
+      "rule": "Every saved Mouse has stable identity",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§2 scalar identities, §7 Snapshot, §12 notifications, §13 commit points"
+    },
+    {
+      "id": "BR-012",
+      "source": "§2",
+      "rule": "Every saved Mouse has a display name",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§7 Snapshot, §10 intents"
+    },
+    {
+      "id": "BR-013",
+      "source": "§2",
+      "rule": "Every saved Mouse has a confirmed profile",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-014",
+      "source": "§2",
+      "rule": "Profile domain is Passthrough/Standard/Escape/Custom",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 intents, §13 commit points"
+    },
+    {
+      "id": "BR-015",
+      "source": "§2",
+      "rule": "Custom uses one global five-source template",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 intents, §13 commit points"
+    },
+    {
+      "id": "BR-016",
+      "source": "§2",
+      "rule": "Screen does not define saved/connected truth",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-017",
+      "source": "§2",
+      "rule": "Escape produces synthetic USB Keyboard output",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-018",
+      "source": "§2",
+      "rule": "UI 1.0 does not discover/pair a Bluetooth keyboard",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 START_PAIR_NEW, §13 Pair New/HANDOFF, §14 stale/late"
+    },
+    {
+      "id": "BR-019",
+      "source": "§3",
+      "rule": "With no saved Mouse, HOME resolves to searching-first",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-020",
+      "source": "§3",
+      "rule": "Initial search uses deterministic 8 s cycles",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 search intents, §11 lifecycle"
+    },
+    {
+      "id": "BR-021",
+      "source": "§3",
+      "rule": "Initial search restarts until valid Mouse accepted",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 search intents, §11 lifecycle"
+    },
+    {
+      "id": "BR-022",
+      "source": "§3",
+      "rule": "searching-first controls are didactic and do not navigate/lock",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-023",
+      "source": "§3",
+      "rule": "first-mouse-connected A/B/X/joystick are didactic; B inert; Y locks",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-024",
+      "source": "§3",
+      "rule": "First completed interaction unlocks, is consumed, then resolves HOME",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-025",
+      "source": "§4",
+      "rule": "HOME state resolver uses saved/current semantic state",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-026",
+      "source": "§4",
+      "rule": "Saved-Mouse reconnect search lasts 8 s",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 search intents, §11 lifecycle"
+    },
+    {
+      "id": "BR-027",
+      "source": "§4",
+      "rule": "Saved search can succeed, time out or be cancelled",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 search intents, §11 lifecycle"
+    },
+    {
+      "id": "BR-028",
+      "source": "§4",
+      "rule": "Retry A starts another search",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-029",
+      "source": "§4",
+      "rule": "HOME connected has four ordered options",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-030",
+      "source": "§4",
+      "rule": "HOME summary shows confirmed state, never pending request",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-031",
+      "source": "§5",
+      "rule": "Pair New searches for unsaved Mouse for 15 s",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 START_PAIR_NEW, §13 Pair New/HANDOFF, §14 stale/late"
+    },
+    {
+      "id": "BR-032",
+      "source": "§5",
+      "rule": "Existing current Mouse remains authoritative while candidate qualifies",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 START_PAIR_NEW, §13 Pair New/HANDOFF, §14 stale/late"
+    },
+    {
+      "id": "BR-033",
+      "source": "§5",
+      "rule": "Already-saved candidate is not accepted as new",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 START_PAIR_NEW, §13 Pair New/HANDOFF, §14 stale/late"
+    },
+    {
+      "id": "BR-034",
+      "source": "§5",
+      "rule": "Pair success performs one logical handoff to new Mouse",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 START_PAIR_NEW, §13 Pair New/HANDOFF, §14 stale/late"
+    },
+    {
+      "id": "BR-035",
+      "source": "§5",
+      "rule": "Abandoned Pair work cannot complete later",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 START_PAIR_NEW, §13 Pair New/HANDOFF, §14 stale/late"
+    },
+    {
+      "id": "BR-036",
+      "source": "§5",
+      "rule": "Pair Back/Lock/timeout choose UI destinations",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-037",
+      "source": "§6",
+      "rule": "KEY B is primary Back with explicit screen exceptions",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-038",
+      "source": "§6",
+      "rule": "home-searching B means cancel then retry",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-039",
+      "source": "§6",
+      "rule": "Profile/Custom/Remove/Pair Back destinations are fixed",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-040",
+      "source": "§6",
+      "rule": "remapper-options uses KEY B: BACK hint",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-041",
+      "source": "§7",
+      "rule": "Y globally locks product screens when saved Mouse exists, except Help",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-042",
+      "source": "§7",
+      "rule": "Help consumes Y instead of locking",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-043",
+      "source": "§7",
+      "rule": "Entering Lock abandons screen-owned async work and invalidates late completion",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§11 lifecycle, §12 notifications, §14 cancellation/stale/late"
+    },
+    {
+      "id": "BR-044",
+      "source": "§7",
+      "rule": "Lock does not remove Mouse/change confirmed profile/disconnect by itself",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-045",
+      "source": "§7",
+      "rule": "Locked effective backlight is 0 and restores after unlock",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-046",
+      "source": "§7",
+      "rule": "Unlock interaction is consumed and resolves HOME",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-047",
+      "source": "§8",
+      "rule": "Help is modal and consumes complete interaction",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-048",
+      "source": "§8",
+      "rule": "Opening Help abandons source-screen async work",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§11 lifecycle, §12 notifications, §14 cancellation/stale/late"
+    },
+    {
+      "id": "BR-049",
+      "source": "§8",
+      "rule": "Search Help returns to coherent retry, not cancelled search",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-050",
+      "source": "§9",
+      "rule": "Passthrough mapping semantics",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-051",
+      "source": "§9",
+      "rule": "Standard mapping semantics",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-052",
+      "source": "§9",
+      "rule": "Escape mapping semantics",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-053",
+      "source": "§9",
+      "rule": "Custom target domain includes six targets",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 intents, §13 commit points"
+    },
+    {
+      "id": "BR-054",
+      "source": "§9",
+      "rule": "Profile apply is asynchronous and ACTIVE only after success",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 APPLY_PROFILE, §13 commit points"
+    },
+    {
+      "id": "BR-055",
+      "source": "§9",
+      "rule": "Desktop normal mode may auto-confirm; lab may inject pending/fail/stale/late",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-056",
+      "source": "§9",
+      "rule": "Disconnect while profile-active immediately removes connected truth",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§10 REMOVE_MOUSE, §13 Remove commit points"
+    },
+    {
+      "id": "BR-057",
+      "source": "§9",
+      "rule": "UI remains in same profile family and shows not-active after disconnect",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-058",
+      "source": "§9",
+      "rule": "escape-active hints contain only B and Y",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-059",
+      "source": "§10",
+      "rule": "Editing Custom changes local draft and may leave it dirty",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-060",
+      "source": "§10",
+      "rule": "Applied Custom and draft are distinct",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 intents, §13 commit points"
+    },
+    {
+      "id": "BR-061",
+      "source": "§10",
+      "rule": "Only successful apply confirmation makes Custom active",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 intents, §13 commit points"
+    },
+    {
+      "id": "BR-062",
+      "source": "§11",
+      "rule": "Saved Devices shows one record/page with circular pagination",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-063",
+      "source": "§11",
+      "rule": "Connected record is first/cyan; others disconnected",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-064",
+      "source": "§11",
+      "rule": "Display-name truncation/suffix/fallback formatting policy",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-065",
+      "source": "§11",
+      "rule": "Connected identity changes may reorder list without changing record identity",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§2 scalar identities, §7 Snapshot, §12 notifications, §13 commit points"
+    },
+    {
+      "id": "BR-066",
+      "source": "§11",
+      "rule": "Remove This target remains same identity if list order changes",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§10 REMOVE_MOUSE, §13 Remove commit points"
+    },
+    {
+      "id": "BR-067",
+      "source": "§12",
+      "rule": "KEY A requests removal and normal simulator auto-completes",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§1–§14 consolidated shared semantics"
+    },
+    {
+      "id": "BR-068",
+      "source": "§12",
+      "rule": "Removing live Mouse ends authority before logical removal success",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§1–§14 consolidated shared semantics"
+    },
+    {
+      "id": "BR-069",
+      "source": "§12",
+      "rule": "Removing last record leads to searching-first; otherwise valid Saved page",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-070",
+      "source": "§12",
+      "rule": "KEY B cancels Remove",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-071",
+      "source": "§12",
+      "rule": "Leaving/Lock/Help prevents old remove result from acting later",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§10 REMOVE_MOUSE, §13 Remove commit points"
+    },
+    {
+      "id": "BR-072",
+      "source": "§13",
+      "rule": "240×240 RGB565 projection",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-073",
+      "source": "§13",
+      "rule": "30 canonical screens",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-074",
+      "source": "§13",
+      "rule": "21-column semantic text width",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-075",
+      "source": "§13",
+      "rule": "gray/white/cyan visual meanings",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-076",
+      "source": "§13",
+      "rule": "searching-first/first-connected/learn backgrounds/hints/colors",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-077",
+      "source": "§14",
+      "rule": "Desktop starts at 200% scale",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-078",
+      "source": "§14",
+      "rule": "Desktop starts with 750% virtual backlight",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-079",
+      "source": "§14",
+      "rule": "Inspector/scenarios/fault injection/log/evidence are dev tools",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    },
+    {
+      "id": "BR-080",
+      "source": "§15",
+      "rule": "BLE/HCI/GATT/HOGP implementation details",
+      "ownership": "Core-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_CORE_LOCAL",
+      "candidate_reference": "v1 candidate §15 persistence/Core-private boundary; backend technology remains private"
+    },
+    {
+      "id": "BR-081",
+      "source": "§15",
+      "rule": "Real bonding implementation/persistence mechanism",
+      "ownership": "Core-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_CORE_LOCAL",
+      "candidate_reference": "v1 candidate §15 persistence/Core-private boundary; backend technology remains private"
+    },
+    {
+      "id": "BR-082",
+      "source": "§15",
+      "rule": "HID++ details",
+      "ownership": "Core-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_CORE_LOCAL",
+      "candidate_reference": "v1 candidate §15 persistence/Core-private boundary; backend technology remains private"
+    },
+    {
+      "id": "BR-083",
+      "source": "§15",
+      "rule": "TinyUSB details",
+      "ownership": "Core-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_CORE_LOCAL",
+      "candidate_reference": "v1 candidate §15 persistence/Core-private boundary; backend technology remains private"
+    },
+    {
+      "id": "BR-084",
+      "source": "§15",
+      "rule": "GPIO/SPI/ST7789/RP2350 details",
+      "ownership": "Core-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_CORE_LOCAL",
+      "candidate_reference": "v1 candidate §15 persistence/Core-private boundary; backend technology remains private"
+    },
+    {
+      "id": "BR-085",
+      "source": "§16",
+      "rule": "Boundary needs Mouse/profile/search/operation semantic snapshot",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§8 search, §10 search intents, §11 lifecycle"
+    },
+    {
+      "id": "BR-086",
+      "source": "§16",
+      "rule": "Boundary needs search/apply/remove/Custom intents",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§4 profiles/Custom, §9 operation, §10 intents, §13 commit points"
+    },
+    {
+      "id": "BR-087",
+      "source": "§16",
+      "rule": "Boundary needs correlatable async results",
+      "ownership": "Shared-contract semantic",
+      "disposition": "EXPRESSED_IN_V1_CANDIDATE",
+      "candidate_reference": "§11 lifecycle, §12 notifications, §14 cancellation/stale/late"
+    },
+    {
+      "id": "BR-088",
+      "source": "§16",
+      "rule": "Screen IDs/selection/Help/Lock/SDL/pixels/Inspector/lab stay private",
+      "ownership": "UI-local",
+      "disposition": "INTENTIONALLY_EXCLUDED_UI_LOCAL",
+      "candidate_reference": "v1 candidate §16/§18 ownership and extension boundary; UIC-00 classification remains authoritative"
+    }
+  ]
+}

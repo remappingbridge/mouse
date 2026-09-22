@@ -1,0 +1,117 @@
+{
+  "object_type": "sequence",
+  "vector_id": "profile-apply-success",
+  "records": [
+    {
+      "index": 0,
+      "record": {
+        "object_type": "intent",
+        "value": {
+          "intent_id": 1001,
+          "kind": "APPLY_PROFILE",
+          "target_mouse_id": 1,
+          "profile": "ESCAPE"
+        }
+      }
+    },
+    {
+      "index": 1,
+      "record": {
+        "object_type": "submission",
+        "value": {
+          "disposition": "ACCEPTED",
+          "activity_id": 5001
+        }
+      }
+    },
+    {
+      "index": 2,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 101,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "STANDARD"
+              }
+            ],
+            "current_mouse_id": 1,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": null,
+            "operation": {
+              "activity_id": 5001,
+              "origin_intent_id": 1001,
+              "kind": "PROFILE_APPLY",
+              "status": "PENDING",
+              "target_mouse_id": 1,
+              "requested_profile": "ESCAPE"
+            }
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7001,
+          "kind": "ACTIVITY_RESULT",
+          "activity_result": {
+            "activity_id": 5001,
+            "origin_intent_id": 1001,
+            "activity_kind": "PROFILE_APPLY",
+            "terminal_status": "SUCCEEDED",
+            "commit_revision": 102
+          }
+        }
+      }
+    },
+    {
+      "index": 4,
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 102,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "ESCAPE"
+              }
+            ],
+            "current_mouse_id": 1,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": null,
+            "operation": {
+              "activity_id": 5001,
+              "origin_intent_id": 1001,
+              "kind": "PROFILE_APPLY",
+              "status": "SUCCEEDED",
+              "target_mouse_id": 1,
+              "requested_profile": "ESCAPE"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
