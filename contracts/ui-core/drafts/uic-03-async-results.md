@@ -1,6 +1,6 @@
 # UIC-03 — Async Results & Ownership
 
-Status: **CANDIDATE — AWAITING HUMAN REVIEW**.
+Status: **ACCEPTED UIC-03 BASELINE — UIC-04 ERROR/TIMEOUT SEMANTICS APPLIED**.
 
 Source baseline:
 
@@ -152,7 +152,8 @@ Rules:
 - `commit_revision` identifies the first Snapshot revision whose confirmed product
   truth includes the terminal commit, or the revision that records cancellation/failure
   without changing confirmed truth;
-- exact public failure code belongs to UIC-04.
+- when `terminal_status = FAILED`, exactly one UIC-04 public error object is present;
+- SUCCEEDED, CANCELLED and TIMED_OUT do not synthesize an error object.
 
 ### 3.2 CONNECTION_CHANGED
 
@@ -442,7 +443,7 @@ Help, Lock, Saved Devices or Remove This.
 CANCELLED is not used for an environmental disconnect; it is reserved for accepted logical
 cancellation.
 
-UIC-04 defines public error categories for environment-caused failures.
+UIC-04 classifies these environment-caused failures with stable public categories such as `AUTHORITY_LOST`, while any raw backend code remains diagnostic-only.
 
 ## 13. Terminal-state retention
 
@@ -506,7 +507,6 @@ UIC-03 resolves:
 Still deferred:
 
 - concrete identity widths/encodings;
-- final public error taxonomy;
-- capabilities and limits;
-- exact timeout implementation/clock representation;
+- concrete C representation of UIC-04 descriptor/errors;
+- exact timer peripheral/tick representation;
 - C ABI, memory ownership and thread-safety.
