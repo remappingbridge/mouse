@@ -1,0 +1,1259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:remappingbridge:ui-core:v1.0.0",
+  "title": "RemappingBridge UI-Core Contract v1.0.0",
+  "description": "Machine-readable semantics for released UI-Core Contract v1.0.0. JSON is conformance notation, not a wire format.",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/descriptorDocument"
+    },
+    {
+      "$ref": "#/$defs/snapshotReadDocument"
+    },
+    {
+      "$ref": "#/$defs/intentDocument"
+    },
+    {
+      "$ref": "#/$defs/submissionDocument"
+    },
+    {
+      "$ref": "#/$defs/notificationDocument"
+    },
+    {
+      "$ref": "#/$defs/sequenceDocument"
+    }
+  ],
+  "$defs": {
+    "id": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "optionalId": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 1
+    },
+    "profile": {
+      "enum": [
+        "PASSTHROUGH",
+        "STANDARD",
+        "ESCAPE",
+        "CUSTOM"
+      ]
+    },
+    "target": {
+      "enum": [
+        "LEFT",
+        "RIGHT",
+        "MIDDLE",
+        "ESCAPE",
+        "FORWARD",
+        "BACKWARD"
+      ]
+    },
+    "customMapping": {
+      "type": "object",
+      "required": [
+        "LEFT",
+        "RIGHT",
+        "MIDDLE",
+        "FORWARD",
+        "BACKWARD"
+      ],
+      "properties": {
+        "LEFT": {
+          "$ref": "#/$defs/target"
+        },
+        "RIGHT": {
+          "$ref": "#/$defs/target"
+        },
+        "MIDDLE": {
+          "$ref": "#/$defs/target"
+        },
+        "FORWARD": {
+          "$ref": "#/$defs/target"
+        },
+        "BACKWARD": {
+          "$ref": "#/$defs/target"
+        }
+      },
+      "additionalProperties": false
+    },
+    "semanticName": {
+      "type": "string",
+      "description": "Valid UTF-8 in JSON; encoded UTF-8 length MUST be <=63 bytes and U+0000 is forbidden.",
+      "maxLength": 63,
+      "pattern": "^[^\\u0000]*$"
+    },
+    "retryability": {
+      "enum": [
+        "NOT_RETRYABLE",
+        "AFTER_REFRESH",
+        "AFTER_STATE_CHANGE",
+        "LATER"
+      ]
+    },
+    "visibility": {
+      "enum": [
+        "DIAGNOSTIC_ONLY",
+        "GENERIC_USER_FAILURE",
+        "USER_ACTIONABLE"
+      ]
+    },
+    "errorCategory": {
+      "enum": [
+        "INVALID_REQUEST",
+        "CONFLICT",
+        "STALE_STATE",
+        "LIMIT_REACHED",
+        "UNSUPPORTED",
+        "INCOMPATIBLE_CONTRACT",
+        "AUTHORITY_LOST",
+        "TEMPORARY_UNAVAILABLE",
+        "PERSISTENCE_FAILURE",
+        "INTERNAL_FAILURE"
+      ]
+    },
+    "error": {
+      "type": "object",
+      "required": [
+        "category",
+        "retryability",
+        "visibility"
+      ],
+      "properties": {
+        "category": {
+          "$ref": "#/$defs/errorCategory"
+        },
+        "retryability": {
+          "$ref": "#/$defs/retryability"
+        },
+        "visibility": {
+          "$ref": "#/$defs/visibility"
+        },
+        "diagnostic_code": {
+          "type": "string",
+          "maxLength": 31
+        },
+        "diagnostic_message": {
+          "type": "string",
+          "maxLength": 127
+        }
+      },
+      "additionalProperties": false
+    },
+    "capability": {
+      "enum": [
+        "FIRST_DISCOVERY",
+        "SAVED_RECONNECT",
+        "PAIR_NEW",
+        "PROFILE_PASSTHROUGH",
+        "PROFILE_STANDARD",
+        "PROFILE_ESCAPE",
+        "PROFILE_CUSTOM",
+        "REMOVE_MOUSE",
+        "ESCAPE_OUTPUT"
+      ]
+    },
+    "descriptor": {
+      "type": "object",
+      "required": [
+        "contract",
+        "limits",
+        "capabilities"
+      ],
+      "properties": {
+        "contract": {
+          "type": "object",
+          "required": [
+            "major",
+            "minor"
+          ],
+          "properties": {
+            "major": {
+              "type": "integer",
+              "const": 1
+            },
+            "minor": {
+              "type": "integer",
+              "minimum": 0
+            }
+          },
+          "additionalProperties": false
+        },
+        "limits": {
+          "type": "object",
+          "required": [
+            "max_saved_mice",
+            "max_mouse_name_utf8_bytes"
+          ],
+          "properties": {
+            "max_saved_mice": {
+              "type": "integer",
+              "const": 16
+            },
+            "max_mouse_name_utf8_bytes": {
+              "type": "integer",
+              "const": 63
+            }
+          },
+          "additionalProperties": false
+        },
+        "capabilities": {
+          "type": "array",
+          "uniqueItems": true,
+          "minItems": 9,
+          "items": {
+            "$ref": "#/$defs/capability"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "savedMouse": {
+      "type": "object",
+      "required": [
+        "mouse_id",
+        "name",
+        "confirmed_profile"
+      ],
+      "properties": {
+        "mouse_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/semanticName"
+        },
+        "confirmed_profile": {
+          "$ref": "#/$defs/profile"
+        }
+      },
+      "additionalProperties": false
+    },
+    "candidate": {
+      "type": "object",
+      "required": [
+        "mouse_id",
+        "name",
+        "already_saved"
+      ],
+      "properties": {
+        "mouse_id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/semanticName"
+        },
+        "already_saved": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "search": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "activity_id",
+        "origin_intent_id",
+        "purpose",
+        "status"
+      ],
+      "properties": {
+        "activity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "origin_intent_id": {
+          "$ref": "#/$defs/id"
+        },
+        "purpose": {
+          "enum": [
+            "FIRST",
+            "SAVED",
+            "PAIR_NEW"
+          ]
+        },
+        "status": {
+          "enum": [
+            "RUNNING",
+            "FOUND",
+            "TIMED_OUT",
+            "FAILED",
+            "CANCELLED"
+          ]
+        },
+        "candidate": {
+          "$ref": "#/$defs/candidate"
+        },
+        "error": {
+          "$ref": "#/$defs/error"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "FOUND"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "candidate"
+            ],
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "FAILED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "error"
+            ],
+            "not": {
+              "required": [
+                "candidate"
+              ]
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "operation": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "required": [
+        "activity_id",
+        "origin_intent_id",
+        "kind",
+        "status",
+        "target_mouse_id"
+      ],
+      "properties": {
+        "activity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "origin_intent_id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "PROFILE_APPLY",
+            "CUSTOM_APPLY",
+            "REMOVE",
+            "HANDOFF"
+          ]
+        },
+        "status": {
+          "enum": [
+            "PENDING",
+            "SUCCEEDED",
+            "FAILED",
+            "CANCELLED"
+          ]
+        },
+        "target_mouse_id": {
+          "$ref": "#/$defs/id"
+        },
+        "requested_profile": {
+          "$ref": "#/$defs/profile"
+        },
+        "requested_custom": {
+          "$ref": "#/$defs/customMapping"
+        },
+        "error": {
+          "$ref": "#/$defs/error"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "PROFILE_APPLY"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "requested_profile"
+            ],
+            "properties": {
+              "requested_profile": {
+                "enum": [
+                  "PASSTHROUGH",
+                  "STANDARD",
+                  "ESCAPE"
+                ]
+              }
+            },
+            "not": {
+              "required": [
+                "requested_custom"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "CUSTOM_APPLY"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "requested_profile",
+              "requested_custom"
+            ],
+            "properties": {
+              "requested_profile": {
+                "const": "CUSTOM"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "REMOVE",
+                  "HANDOFF"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "requested_profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "requested_custom"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "FAILED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "required": [
+              "error"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "snapshot": {
+      "type": "object",
+      "required": [
+        "revision",
+        "saved_mice",
+        "current_mouse_id",
+        "custom_confirmed",
+        "search",
+        "operation"
+      ],
+      "properties": {
+        "revision": {
+          "$ref": "#/$defs/id"
+        },
+        "saved_mice": {
+          "type": "array",
+          "maxItems": 16,
+          "items": {
+            "$ref": "#/$defs/savedMouse"
+          }
+        },
+        "current_mouse_id": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "custom_confirmed": {
+          "$ref": "#/$defs/customMapping"
+        },
+        "search": {
+          "$ref": "#/$defs/search"
+        },
+        "operation": {
+          "$ref": "#/$defs/operation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "snapshotRead": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "snapshot"
+          ],
+          "properties": {
+            "kind": {
+              "const": "SNAPSHOT"
+            },
+            "snapshot": {
+              "$ref": "#/$defs/snapshot"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "kind",
+            "error"
+          ],
+          "properties": {
+            "kind": {
+              "const": "UNAVAILABLE"
+            },
+            "error": {
+              "$ref": "#/$defs/error"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "intent": {
+      "type": "object",
+      "required": [
+        "intent_id",
+        "kind"
+      ],
+      "properties": {
+        "intent_id": {
+          "$ref": "#/$defs/id"
+        },
+        "kind": {
+          "enum": [
+            "START_FIRST_SEARCH",
+            "START_SAVED_SEARCH",
+            "START_PAIR_NEW",
+            "CANCEL_ACTIVITY",
+            "APPLY_PROFILE",
+            "APPLY_CUSTOM",
+            "REMOVE_MOUSE"
+          ]
+        },
+        "target_activity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "target_mouse_id": {
+          "$ref": "#/$defs/id"
+        },
+        "profile": {
+          "enum": [
+            "PASSTHROUGH",
+            "STANDARD",
+            "ESCAPE"
+          ]
+        },
+        "mapping": {
+          "$ref": "#/$defs/customMapping"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "enum": [
+                  "START_FIRST_SEARCH",
+                  "START_SAVED_SEARCH",
+                  "START_PAIR_NEW"
+                ]
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "target_mouse_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "CANCEL_ACTIVITY"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "target_activity_id"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_mouse_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "APPLY_PROFILE"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "target_mouse_id",
+              "profile"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "APPLY_CUSTOM"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "target_mouse_id",
+              "mapping"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "REMOVE_MOUSE"
+              }
+            },
+            "required": [
+              "kind"
+            ]
+          },
+          "then": {
+            "required": [
+              "target_mouse_id"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "target_activity_id"
+                  ]
+                },
+                {
+                  "required": [
+                    "profile"
+                  ]
+                },
+                {
+                  "required": [
+                    "mapping"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "submission": {
+      "type": "object",
+      "required": [
+        "disposition"
+      ],
+      "properties": {
+        "disposition": {
+          "enum": [
+            "ACCEPTED",
+            "REPLAY",
+            "REJECTED"
+          ]
+        },
+        "activity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "error": {
+          "$ref": "#/$defs/error"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "disposition": {
+                "const": "REJECTED"
+              }
+            },
+            "required": [
+              "disposition"
+            ]
+          },
+          "then": {
+            "required": [
+              "error"
+            ],
+            "not": {
+              "required": [
+                "activity_id"
+              ]
+            }
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "terminalStatus": {
+      "enum": [
+        "SUCCEEDED",
+        "TIMED_OUT",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
+    "activityResult": {
+      "type": "object",
+      "required": [
+        "activity_id",
+        "origin_intent_id",
+        "activity_kind",
+        "terminal_status",
+        "commit_revision"
+      ],
+      "properties": {
+        "activity_id": {
+          "$ref": "#/$defs/id"
+        },
+        "origin_intent_id": {
+          "$ref": "#/$defs/id"
+        },
+        "activity_kind": {
+          "enum": [
+            "FIRST",
+            "SAVED",
+            "PAIR_NEW",
+            "PROFILE_APPLY",
+            "CUSTOM_APPLY",
+            "REMOVE",
+            "HANDOFF"
+          ]
+        },
+        "terminal_status": {
+          "$ref": "#/$defs/terminalStatus"
+        },
+        "commit_revision": {
+          "$ref": "#/$defs/id"
+        },
+        "candidate": {
+          "$ref": "#/$defs/candidate"
+        },
+        "cancel_intent_id": {
+          "$ref": "#/$defs/id"
+        },
+        "error": {
+          "$ref": "#/$defs/error"
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "terminal_status": {
+                "const": "FAILED"
+              }
+            },
+            "required": [
+              "terminal_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "error"
+            ]
+          },
+          "else": {
+            "not": {
+              "required": [
+                "error"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "activity_kind": {
+                "enum": [
+                  "PROFILE_APPLY",
+                  "CUSTOM_APPLY",
+                  "REMOVE",
+                  "HANDOFF"
+                ]
+              }
+            },
+            "required": [
+              "activity_kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "terminal_status": {
+                "enum": [
+                  "SUCCEEDED",
+                  "FAILED",
+                  "CANCELLED"
+                ]
+              }
+            },
+            "not": {
+              "required": [
+                "candidate"
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "activity_kind": {
+                "enum": [
+                  "FIRST",
+                  "SAVED",
+                  "PAIR_NEW"
+                ]
+              }
+            },
+            "required": [
+              "activity_kind"
+            ]
+          },
+          "then": {
+            "properties": {
+              "terminal_status": {
+                "enum": [
+                  "SUCCEEDED",
+                  "TIMED_OUT",
+                  "FAILED",
+                  "CANCELLED"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "activity_kind": {
+                "enum": [
+                  "FIRST",
+                  "SAVED",
+                  "PAIR_NEW"
+                ]
+              },
+              "terminal_status": {
+                "const": "SUCCEEDED"
+              }
+            },
+            "required": [
+              "activity_kind",
+              "terminal_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "candidate"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "terminal_status": {
+                "const": "CANCELLED"
+              }
+            },
+            "required": [
+              "terminal_status"
+            ]
+          },
+          "then": {
+            "required": [
+              "cancel_intent_id"
+            ]
+          }
+        }
+      ]
+    },
+    "connectionChanged": {
+      "type": "object",
+      "required": [
+        "previous_current_mouse_id",
+        "current_mouse_id",
+        "commit_revision",
+        "reason"
+      ],
+      "properties": {
+        "previous_current_mouse_id": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "current_mouse_id": {
+          "$ref": "#/$defs/optionalId"
+        },
+        "commit_revision": {
+          "$ref": "#/$defs/id"
+        },
+        "reason": {
+          "enum": [
+            "PHYSICAL_DISCONNECT",
+            "PHYSICAL_CONNECT",
+            "SEARCH_RECONNECT",
+            "FIRST_ACCEPT",
+            "HANDOFF",
+            "REMOVE_RELEASE"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "notification": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "notification_seq",
+            "kind",
+            "activity_result"
+          ],
+          "properties": {
+            "notification_seq": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "ACTIVITY_RESULT"
+            },
+            "activity_result": {
+              "$ref": "#/$defs/activityResult"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "notification_seq",
+            "kind",
+            "connection_changed"
+          ],
+          "properties": {
+            "notification_seq": {
+              "$ref": "#/$defs/id"
+            },
+            "kind": {
+              "const": "CONNECTION_CHANGED"
+            },
+            "connection_changed": {
+              "$ref": "#/$defs/connectionChanged"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "descriptorDocument": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "value"
+      ],
+      "properties": {
+        "object_type": {
+          "const": "descriptor"
+        },
+        "value": {
+          "$ref": "#/$defs/descriptor"
+        }
+      },
+      "additionalProperties": false
+    },
+    "snapshotReadDocument": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "value"
+      ],
+      "properties": {
+        "object_type": {
+          "const": "snapshot_read"
+        },
+        "value": {
+          "$ref": "#/$defs/snapshotRead"
+        }
+      },
+      "additionalProperties": false
+    },
+    "intentDocument": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "value"
+      ],
+      "properties": {
+        "object_type": {
+          "const": "intent"
+        },
+        "value": {
+          "$ref": "#/$defs/intent"
+        }
+      },
+      "additionalProperties": false
+    },
+    "submissionDocument": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "value"
+      ],
+      "properties": {
+        "object_type": {
+          "const": "submission"
+        },
+        "value": {
+          "$ref": "#/$defs/submission"
+        }
+      },
+      "additionalProperties": false
+    },
+    "notificationDocument": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "value"
+      ],
+      "properties": {
+        "object_type": {
+          "const": "notification"
+        },
+        "value": {
+          "$ref": "#/$defs/notification"
+        }
+      },
+      "additionalProperties": false
+    },
+    "recordDocument": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/descriptorDocument"
+        },
+        {
+          "$ref": "#/$defs/snapshotReadDocument"
+        },
+        {
+          "$ref": "#/$defs/intentDocument"
+        },
+        {
+          "$ref": "#/$defs/submissionDocument"
+        },
+        {
+          "$ref": "#/$defs/notificationDocument"
+        }
+      ]
+    },
+    "sequenceRecord": {
+      "type": "object",
+      "required": [
+        "index",
+        "record"
+      ],
+      "properties": {
+        "index": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "record": {
+          "$ref": "#/$defs/recordDocument"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sequenceDocument": {
+      "type": "object",
+      "required": [
+        "object_type",
+        "vector_id",
+        "records"
+      ],
+      "properties": {
+        "object_type": {
+          "const": "sequence"
+        },
+        "vector_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "records": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/sequenceRecord"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
