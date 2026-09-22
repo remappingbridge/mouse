@@ -1,0 +1,81 @@
+{
+  "object_type": "sequence",
+  "vector_id": "cancel-late-success",
+  "records": [
+    {
+      "index": 0,
+      "record": {
+        "object_type": "intent",
+        "value": {
+          "intent_id": 1003,
+          "kind": "CANCEL_ACTIVITY",
+          "target_activity_id": 5002
+        }
+      }
+    },
+    {
+      "index": 1,
+      "record": {
+        "object_type": "submission",
+        "value": {
+          "disposition": "ACCEPTED"
+        }
+      }
+    },
+    {
+      "index": 2,
+      "record": {
+        "object_type": "notification",
+        "value": {
+          "notification_seq": 7002,
+          "kind": "ACTIVITY_RESULT",
+          "activity_result": {
+            "activity_id": 5002,
+            "origin_intent_id": 999,
+            "activity_kind": "PROFILE_APPLY",
+            "terminal_status": "CANCELLED",
+            "commit_revision": 110,
+            "cancel_intent_id": 1003
+          }
+        }
+      }
+    },
+    {
+      "index": 3,
+      "note": "Any later physical success for activity 5002 produces no contract record or state commit.",
+      "record": {
+        "object_type": "snapshot_read",
+        "value": {
+          "kind": "SNAPSHOT",
+          "snapshot": {
+            "revision": 110,
+            "saved_mice": [
+              {
+                "mouse_id": 1,
+                "name": "LIFT",
+                "confirmed_profile": "PASSTHROUGH"
+              }
+            ],
+            "current_mouse_id": 1,
+            "custom_confirmed": {
+              "LEFT": "LEFT",
+              "RIGHT": "RIGHT",
+              "MIDDLE": "MIDDLE",
+              "FORWARD": "FORWARD",
+              "BACKWARD": "BACKWARD"
+            },
+            "search": null,
+            "operation": {
+              "activity_id": 5002,
+              "origin_intent_id": 999,
+              "kind": "PROFILE_APPLY",
+              "status": "CANCELLED",
+              "target_mouse_id": 1,
+              "requested_profile": "STANDARD"
+            }
+          }
+        }
+      }
+    }
+  ]
+}
